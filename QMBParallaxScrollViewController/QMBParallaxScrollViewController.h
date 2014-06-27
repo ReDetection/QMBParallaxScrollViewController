@@ -56,9 +56,6 @@ typedef NS_ENUM(NSUInteger, QMBParallaxGesture) {
 
 @property (nonatomic, strong) id<QMBParallaxScrollViewControllerDelegate> delegate;
 
-@property (nonatomic, strong, readonly) UIViewController * topViewController;
-@property (nonatomic, strong, readonly) UIViewController<QMBParallaxScrollViewHolder> * bottomViewController;
-
 @property (nonatomic, assign, readonly) CGFloat topHeight;
 @property (nonatomic, assign, setter = setFullHeight:) CGFloat fullHeight;
 @property (nonatomic, assign, setter = setOverPanHeight:) CGFloat overPanHeight;
@@ -66,7 +63,7 @@ typedef NS_ENUM(NSUInteger, QMBParallaxGesture) {
 @property (nonatomic, readonly) QMBParallaxState state;
 
 // inits
--(void) setupWithTopViewController:(UIViewController *)topViewController andTopHeight:(CGFloat)height andBottomViewController:(UIViewController<QMBParallaxScrollViewHolder> *)bottomViewController;
+-(void)setupWithTopView:(UIView *)topView topHeight:(CGFloat)height bottomView:(UIScrollView *)bottomView;
 
 
 - (void)parallaxScrollViewDidScroll:(CGPoint)contentOffset;

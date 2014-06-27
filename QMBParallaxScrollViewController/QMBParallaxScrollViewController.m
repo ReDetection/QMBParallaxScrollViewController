@@ -16,9 +16,8 @@
 @property (nonatomic, strong) UITapGestureRecognizer *topViewGestureRecognizer;
 @property (nonatomic, strong) UITapGestureRecognizer *bottomViewGestureRecognizer;
 @property (nonatomic, strong) UIScrollView *parallaxScrollView;
+@property (nonatomic, strong) UIView *topView;
 @property (nonatomic, assign) CGFloat currentTopHeight;
-@property (nonatomic, strong, readwrite) UIViewController * topViewController;
-@property (nonatomic, strong, readwrite) UIViewController<QMBParallaxScrollViewHolder> * bottomViewController;
 
 @property (nonatomic, assign, readwrite) CGFloat topHeight;
 @property (nonatomic, readwrite) QMBParallaxState state;
@@ -38,30 +37,18 @@
 
 #pragma mark - QMBParallaxScrollViewController Methods
 
-- (void)setupWithTopViewController:(UIViewController *)topViewController andTopHeight:(CGFloat)height andBottomViewController:(UIViewController<QMBParallaxScrollViewHolder> *)bottomViewController{
-    
-    self.topViewController = topViewController;
-    self.bottomViewController = bottomViewController;
+- (void)setupWithTopView:(UIView *)topView topHeight:(CGFloat)height bottomView:(UIScrollView *)bottomView {
+
+    self.topView = topView;
     self.topHeight = height;
-    
-    [self.topViewController.view setClipsToBounds:YES];
-    [self.bottomViewController.view setClipsToBounds:YES];
-    
-    [self addChildViewController:self.bottomViewController];
-    [self.view addSubview:self.bottomViewController.view];
-    [self.bottomViewController didMoveToParentViewController:self];
 
-    [self addChildViewController:self.topViewController];
-    [self.view addSubview:self.topViewController.view];
-    [self.topViewController didMoveToParentViewController:self];
+    [topView setClipsToBounds:YES];
+    [bottomView setClipsToBounds:YES];
 
-    [self.topViewController.view setAutoresizingMask:UIViewAutoresizingNone];
-    self.bottomViewController.view.frame = self.view.frame;
-    
-    if ([self.bottomViewController respondsToSelector:@selector(scrollViewForParallexController)]){
-        _parallaxScrollView = [self.bottomViewController scrollViewForParallexController];
-    }
-    
+    [topView setAutoresizingMask:UIViewAutoresizingNone];
+    bottomView.frame = self.view.frame;
+    _parallaxScrollView = bottomView;
+
     NSAssert(_parallaxScrollView, @"No Scroll View given");
 
     _parallaxScrollView.frame = self.view.frame;
@@ -76,13 +63,13 @@
     self.topViewGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     [self.topViewGestureRecognizer setNumberOfTouchesRequired:1];
     [self.topViewGestureRecognizer setNumberOfTapsRequired:1];
-    [self.topViewController.view setUserInteractionEnabled:YES];
+    [self.topView setUserInteractionEnabled:YES];
     [self enableTapGestureTopView:YES];
     
     self.bottomViewGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleBottomTouch:)];
     [self.bottomViewGestureRecognizer setNumberOfTouchesRequired:1];
-    [self.bottomViewController.view setUserInteractionEnabled:YES];
-    
+    [bottomView setUserInteractionEnabled:YES];
+
     //Register Observer
     [_parallaxScrollView addObserver:self forKeyPath:@"contentOffset" options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld) context:nil];
     [self addObserver:self forKeyPath:@"state" options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld) context:nil];
@@ -129,9 +116,7 @@
 }
 
 - (void) changeTopHeight:(CGFloat) height{
-    
-    self.topViewController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, height);
-    
+    self.topView.frame = CGRectMake(0, 0, self.view.frame.size.width, height);
     _parallaxScrollView.contentInset = UIEdgeInsetsMake(height, 0, 0, 0);
     _currentTopHeight = height;
 
@@ -177,20 +162,20 @@
         return;
     }
     
-    CGRect currentParallaxFrame = self.topViewController.view.frame;
-    
+    CGRect currentParallaxFrame = self.topView.frame;
+
     if (y > 0) {
         
         CGFloat newHeight = _currentTopHeight - y;
-        
-        [self.topViewController.view setHidden:(newHeight <= 0)];
-        
-        if (!self.topViewController.view.hidden) {
-            
-            self.topViewController.view.frame = CGRectMake(currentParallaxFrame.origin.x, currentParallaxFrame.origin.y, currentParallaxFrame.size.width, newHeight);
+
+        [self.topView setHidden:(newHeight <= 0)];
+
+        if (!self.topView.hidden) {
+
+            self.topView.frame = CGRectMake(currentParallaxFrame.origin.x, currentParallaxFrame.origin.y, currentParallaxFrame.size.width, newHeight);
 
             if ([self.delegate respondsToSelector:@selector(parallaxScrollViewController:didChangeTopHeight:)]){
-                [self.delegate parallaxScrollViewController:self didChangeTopHeight:self.topViewController.view.frame.size.height];
+                [self.delegate parallaxScrollViewController:self didChangeTopHeight:self.topView.frame.size.height];
             }
             
         }
@@ -203,22 +188,20 @@
         
  
     } else {
-        
-        [self.topViewController.view setHidden:NO];
-        
+
+        [self.topView setHidden:NO];
+
         CGFloat newHeight = _currentTopHeight - y;
         CGRect newFrame =  CGRectMake(currentParallaxFrame.origin.x, currentParallaxFrame.origin.y, currentParallaxFrame.size.width, newHeight);
-        self.topViewController.view.frame = newFrame;
+        self.topView.frame = newFrame;
         if ([self.delegate respondsToSelector:@selector(parallaxScrollViewController:didChangeTopHeight:)]){
-            [self.delegate parallaxScrollViewController:self didChangeTopHeight:self.topViewController.view.frame.size.height];
+            [self.delegate parallaxScrollViewController:self didChangeTopHeight:self.topView.frame.size.height];
         }
         
         _parallaxScrollView.contentInset = UIEdgeInsetsMake(_currentTopHeight, 0, 0, 0);
     }
-    
-    [_parallaxScrollView setShowsVerticalScrollIndicator:self.topViewController.view.hidden];
-    
-   
+
+    [_parallaxScrollView setShowsVerticalScrollIndicator:self.topView.hidden];
 }
 
 
@@ -239,9 +222,9 @@
 
 - (void)enableTapGestureTopView:(BOOL)enable{
     if (enable) {
-        [self.topViewController.view addGestureRecognizer:self.topViewGestureRecognizer];
+        [self.topView addGestureRecognizer:self.topViewGestureRecognizer];
     }else {
-        [self.topViewController.view removeGestureRecognizer:self.topViewGestureRecognizer];
+        [self.topView removeGestureRecognizer:self.topViewGestureRecognizer];
     }
 }
 
@@ -268,28 +251,22 @@
     
     [_parallaxScrollView setScrollEnabled:NO];
     [_parallaxScrollView scrollRectToVisible:CGRectMake(0, 0, 0, 0) animated:YES];
-    
-    
-    [UIView animateWithDuration:.3
-                          delay:0.0
-                        options:UIViewAnimationOptionCurveEaseInOut
-                     animations:^{
-                         [self changeTopHeight:show ?  _fullHeight : _topHeight];
-                         
-                     }
-                     completion:^(BOOL finished){
-                         [_parallaxScrollView setContentOffset:_parallaxScrollView.contentOffset animated:NO];
-                         [_parallaxScrollView setScrollEnabled:YES];
-                         _isAnimating = NO;
-                         
-                         if (self.state == QMBParallaxStateFullSize){
-                             self.state = QMBParallaxStateVisible;
-                         }else {
-                             self.state = QMBParallaxStateFullSize;
-                         }
-                     }];
-    
-   
+
+
+    [UIView animateWithDuration:.3 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        [self changeTopHeight:show ?  _fullHeight : _topHeight];
+    } completion:^(BOOL finished) {
+        [_parallaxScrollView setContentOffset:_parallaxScrollView.contentOffset animated:NO];
+        [_parallaxScrollView setScrollEnabled:YES];
+        _isAnimating = NO;
+
+        if (self.state == QMBParallaxStateFullSize){
+            self.state = QMBParallaxStateVisible;
+        }else {
+            self.state = QMBParallaxStateFullSize;
+        }
+    }];
+
 }
 
 
