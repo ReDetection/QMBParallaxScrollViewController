@@ -75,4 +75,9 @@ typedef NS_ENUM(NSUInteger, QMBParallaxGesture) {
  */
 - (void) enableTapGestureTopView:(BOOL) enable;
 
+/**
+ * Expands top view to the QMBParallaxStateFullSize state
+ */
+- (void)showFullTopView:(BOOL)show;
+
 @end
