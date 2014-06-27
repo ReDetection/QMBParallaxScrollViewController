@@ -129,13 +129,9 @@
 
 - (void)parallaxScrollViewDidScroll:(CGPoint)contentOffset {
     
-    NSLog(@"%f",_parallaxScrollView.contentOffset.y);
-    NSLog(@"%f",_lastOffsetY);
     if (_parallaxScrollView.contentOffset.y > _lastOffsetY){
-        NSLog(@"UP");
         self.lastGesture = QMBParallaxGestureScrollsUp;
     }else {
-        NSLog(@"DOWN");
         self.lastGesture = QMBParallaxGestureScrollsDown;
     }
     _lastOffsetY = _parallaxScrollView.contentOffset.y;
