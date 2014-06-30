@@ -116,7 +116,7 @@
 }
 
 - (void) changeTopHeight:(CGFloat) height{
-    self.topView.frame = CGRectMake(0, 0, self.view.frame.size.width, height);
+    self.topView.frame = CGRectMake(_parallaxScrollView.frame.origin.x, _parallaxScrollView.frame.origin.y, _parallaxScrollView.frame.size.width, height);
     _parallaxScrollView.contentInset = UIEdgeInsetsMake(height, 0, 0, 0);
     _currentTopHeight = height;
 
@@ -158,8 +158,6 @@
         return;
     }
     
-    CGRect currentParallaxFrame = self.topView.frame;
-
     if (y > 0) {
         
         CGFloat newHeight = _currentTopHeight - y;
@@ -168,7 +166,7 @@
 
         if (!self.topView.hidden) {
 
-            self.topView.frame = CGRectMake(currentParallaxFrame.origin.x, currentParallaxFrame.origin.y, currentParallaxFrame.size.width, newHeight);
+            self.topView.frame = CGRectMake(_parallaxScrollView.frame.origin.x, _parallaxScrollView.frame.origin.y, _parallaxScrollView.frame.size.width, newHeight);
 
             if ([self.delegate respondsToSelector:@selector(parallaxScrollViewController:didChangeTopHeight:)]){
                 [self.delegate parallaxScrollViewController:self didChangeTopHeight:self.topView.frame.size.height];
@@ -188,7 +186,7 @@
         [self.topView setHidden:NO];
 
         CGFloat newHeight = _currentTopHeight - y;
-        CGRect newFrame =  CGRectMake(currentParallaxFrame.origin.x, currentParallaxFrame.origin.y, currentParallaxFrame.size.width, newHeight);
+        CGRect newFrame =  CGRectMake(_parallaxScrollView.frame.origin.x, _parallaxScrollView.frame.origin.y, _parallaxScrollView.frame.size.width, newHeight);
         self.topView.frame = newFrame;
         if ([self.delegate respondsToSelector:@selector(parallaxScrollViewController:didChangeTopHeight:)]){
             [self.delegate parallaxScrollViewController:self didChangeTopHeight:self.topView.frame.size.height];
@@ -251,18 +249,13 @@
 
     [UIView animateWithDuration:.3 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         [self changeTopHeight:show ?  _fullHeight : _topHeight];
-        [_parallaxScrollView setContentOffset:_parallaxScrollView.contentOffset animated:YES];
 
     } completion:^(BOOL finished) {
-        [_parallaxScrollView setContentOffset:_parallaxScrollView.contentOffset animated:NO];
+        [_parallaxScrollView setContentOffset:CGPointMake(0,- _parallaxScrollView.contentInset.top) animated:NO];
         [_parallaxScrollView setScrollEnabled:YES];
         _isAnimating = NO;
 
-        if (self.state == QMBParallaxStateFullSize){
-            self.state = QMBParallaxStateVisible;
-        }else {
-            self.state = QMBParallaxStateFullSize;
-        }
+        self.state = show ? QMBParallaxStateFullSize : QMBParallaxStateVisible;
     }];
 
 }
