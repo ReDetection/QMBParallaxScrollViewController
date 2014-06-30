@@ -251,6 +251,8 @@
 
     [UIView animateWithDuration:.3 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         [self changeTopHeight:show ?  _fullHeight : _topHeight];
+        [_parallaxScrollView setContentOffset:_parallaxScrollView.contentOffset animated:YES];
+
     } completion:^(BOOL finished) {
         [_parallaxScrollView setContentOffset:_parallaxScrollView.contentOffset animated:NO];
         [_parallaxScrollView setScrollEnabled:YES];
