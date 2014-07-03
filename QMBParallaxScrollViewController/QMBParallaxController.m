@@ -1,14 +1,14 @@
 //
-//  QMBParallaxScrollViewController.m
+//  QMBParallaxController.m
 //  QMBParallaxScrollView-Sample
 //
 //  Created by Toni Möckel on 02.11.13.
 //  Copyright (c) 2013 Toni Möckel. All rights reserved.
 //
 
-#import "QMBParallaxScrollViewController.h"
+#import "QMBParallaxController.h"
 
-@interface QMBParallaxScrollViewController (){
+@interface QMBParallaxController (){
     BOOL _isAnimating;
     float _lastOffsetY;
 }
@@ -25,17 +25,9 @@
 
 @end
 
-@implementation QMBParallaxScrollViewController
+@implementation QMBParallaxController
 
-
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
-}
-
-#pragma mark - QMBParallaxScrollViewController Methods
+#pragma mark - QMBParallaxController Methods
 
 - (void)setupWithTopView:(UIView *)topView topHeight:(CGFloat)height bottomView:(UIScrollView *)bottomView {
 
@@ -46,19 +38,14 @@
     [bottomView setClipsToBounds:YES];
 
     [topView setAutoresizingMask:UIViewAutoresizingNone];
-    bottomView.frame = self.view.frame;
     _parallaxScrollView = bottomView;
-
-    NSAssert(_parallaxScrollView, @"No Scroll View given");
-
-    _parallaxScrollView.frame = self.view.frame;
     _parallaxScrollView.alwaysBounceVertical = YES;
     
     //Configs
     
     [self changeTopHeight:height];
     [self setOverPanHeight:height * 1.5];
-    [self setFullHeight:self.view.frame.size.height];
+    [self setFullHeight:_parallaxScrollView.frame.size.height];
 
     self.topViewGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     [self.topViewGestureRecognizer setNumberOfTouchesRequired:1];
@@ -196,20 +183,6 @@
     }
 
     [_parallaxScrollView setShowsVerticalScrollIndicator:self.topView.hidden];
-}
-
-
-
-#pragma mark - Helper Methods
-
-- (void) performOptionalDelegateSelector:(SEL)selector withObject:(id)arg1 andObject:(id) arg2 {
-    if ([self.delegate respondsToSelector:selector]){
-        // Fix unknown selector warning
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-        [self.delegate performSelector:selector withObject:arg1 withObject:arg2];
-#pragma clang diagnostic pop
-    }
 }
 
 #pragma mark - User Interactions
