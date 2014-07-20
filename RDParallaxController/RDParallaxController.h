@@ -10,19 +10,19 @@
 
 @class RDParallaxController;
 
-typedef NS_ENUM(NSUInteger, QMBParallaxState) {
-    QMBParallaxStateVisible = 0,
-    QMBParallaxStateFullSize = 1,
-    QMBParallaxStateHidden = 2,
+typedef NS_ENUM(NSUInteger, RDParallaxState) {
+    RDParallaxStateVisible = 0,
+    RDParallaxStateFullSize = 1,
+    RDParallaxStateHidden = 2,
 };
 
-typedef NS_ENUM(NSUInteger, QMBParallaxGesture) {
-    QMBParallaxGestureTopViewTap = 0,
-    QMBParallaxGestureScrollsDown = 1,
-    QMBParallaxGestureScrollsUp = 2,
+typedef NS_ENUM(NSUInteger, RDParallaxGesture) {
+    RDParallaxGestureTopViewTap = 0,
+    RDParallaxGestureScrollsDown = 1,
+    RDParallaxGestureScrollsUp = 2,
 };
 
-@protocol QMBParallaxScrollViewControllerDelegate <NSObject>
+@protocol RDParallaxControllerDelegate <NSObject>
 
 @optional
 
@@ -30,12 +30,12 @@ typedef NS_ENUM(NSUInteger, QMBParallaxGesture) {
  * Callback when the user tapped the top-view 
  * sender is usually the UITapGestureRecognizer instance
  */
-- (void) parallaxScrollViewController:(RDParallaxController *) controller didChangeGesture:(QMBParallaxGesture)newGesture oldGesture:(QMBParallaxGesture)oldGesture;
+- (void) parallaxScrollViewController:(RDParallaxController *) controller didChangeGesture:(RDParallaxGesture)newGesture oldGesture:(RDParallaxGesture)oldGesture;
 
 /**
- * Callback when the state changed to QMBParallaxStateFullSize, QMBParallaxStateVisible or QMBParallaxStateHidden
+ * Callback when the state changed to RDParallaxStateFullSize, RDParallaxStateVisible or RDParallaxStateHidden
  */
-- (void) parallaxScrollViewController:(RDParallaxController *) controller didChangeState:(QMBParallaxState) state;
+- (void) parallaxScrollViewController:(RDParallaxController *) controller didChangeState:(RDParallaxState) state;
 
 /**
  * Callback when the top height changed
@@ -48,13 +48,13 @@ typedef NS_ENUM(NSUInteger, QMBParallaxGesture) {
 
 @interface RDParallaxController : NSObject<UIGestureRecognizerDelegate>
 
-@property (nonatomic, strong) id<QMBParallaxScrollViewControllerDelegate> delegate;
+@property (nonatomic, strong) id<RDParallaxControllerDelegate> delegate;
 
 @property (nonatomic, assign, readonly) CGFloat topHeight;
 @property (nonatomic, assign, setter = setFullHeight:) CGFloat fullHeight;
 @property (nonatomic, assign, setter = setOverPanHeight:) CGFloat overPanHeight;
 
-@property (nonatomic, readonly) QMBParallaxState state;
+@property (nonatomic, readonly) RDParallaxState state;
 
 // inits
 -(void)setupWithTopView:(UIView *)topView topHeight:(CGFloat)height bottomView:(UIScrollView *)bottomView;
@@ -65,12 +65,12 @@ typedef NS_ENUM(NSUInteger, QMBParallaxGesture) {
 
 /**
  * Config to enable or disable top-view tap control
- * Call will be responsed by QMBParallaxScrollViewControllerDelegate instance
+ * Call will be responsed by RDParallaxControllerDelegate instance
  */
 - (void) enableTapGestureTopView:(BOOL) enable;
 
 /**
- * Expands top view to the QMBParallaxStateFullSize state
+ * Expands top view to the RDParallaxStateFullSize state
  */
 - (void)showFullTopView:(BOOL)show;
 

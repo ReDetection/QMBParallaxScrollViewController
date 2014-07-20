@@ -20,8 +20,8 @@
 @property (nonatomic, assign) CGFloat currentTopHeight;
 
 @property (nonatomic, assign, readwrite) CGFloat topHeight;
-@property (nonatomic, readwrite) QMBParallaxState state;
-@property (nonatomic, readwrite) QMBParallaxGesture lastGesture;
+@property (nonatomic, readwrite) RDParallaxState state;
+@property (nonatomic, readwrite) RDParallaxGesture lastGesture;
 
 @end
 
@@ -76,7 +76,7 @@
             return;
         }
         if ([self.delegate respondsToSelector:@selector(parallaxScrollViewController:didChangeState:)]){
-            [(id<QMBParallaxScrollViewControllerDelegate>) self.delegate parallaxScrollViewController:self didChangeState:[[change valueForKey:NSKeyValueChangeNewKey] intValue]];
+            [self.delegate parallaxScrollViewController:self didChangeState:(RDParallaxState) [[change valueForKey:NSKeyValueChangeNewKey] intValue]];
         }
 
     }
@@ -117,9 +117,9 @@
 - (void)parallaxScrollViewDidScroll:(CGPoint)contentOffset {
     
     if (_parallaxScrollView.contentOffset.y > _lastOffsetY){
-        self.lastGesture = QMBParallaxGestureScrollsUp;
+        self.lastGesture = RDParallaxGestureScrollsUp;
     }else {
-        self.lastGesture = QMBParallaxGestureScrollsDown;
+        self.lastGesture = RDParallaxGestureScrollsDown;
     }
     _lastOffsetY = _parallaxScrollView.contentOffset.y;
     
@@ -132,15 +132,15 @@
      * if top-view height is full screen
      * dont resize top view -> Fullscreen Mode
      */
-    if (self.lastGesture == QMBParallaxGestureScrollsDown && _parallaxScrollView.contentOffset.y < -_overPanHeight){
-        if (self.state != QMBParallaxStateFullSize){
+    if (self.lastGesture == RDParallaxGestureScrollsDown && _parallaxScrollView.contentOffset.y < -_overPanHeight){
+        if (self.state != RDParallaxStateFullSize){
             [self showFullTopView:YES];
         }
         
         return;
     }
     
-    if (self.state == QMBParallaxStateFullSize && self.lastGesture == QMBParallaxGestureScrollsUp){
+    if (self.state == RDParallaxStateFullSize && self.lastGesture == RDParallaxGestureScrollsUp){
         [self showFullTopView:NO];
         return;
     }
@@ -197,15 +197,15 @@
 
 - (void) handleTap:(id)sender {
     
-    self.lastGesture = QMBParallaxGestureTopViewTap;
+    self.lastGesture = RDParallaxGestureTopViewTap;
     
-    [self showFullTopView: self.state != QMBParallaxStateFullSize];
+    [self showFullTopView: self.state != RDParallaxStateFullSize];
     
 }
 
 - (void) handleBottomTouch:(id)sender {
     
-    if (self.state == QMBParallaxStateFullSize){
+    if (self.state == RDParallaxStateFullSize){
         [self showFullTopView:NO];
     }
     
@@ -228,7 +228,7 @@
         [_parallaxScrollView setScrollEnabled:YES];
         _isAnimating = NO;
 
-        self.state = show ? QMBParallaxStateFullSize : QMBParallaxStateVisible;
+        self.state = show ? RDParallaxStateFullSize : RDParallaxStateVisible;
     }];
 
 }

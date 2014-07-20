@@ -11,7 +11,7 @@
 #import "KIImagePager.h"
 
 
-@interface ParallaxPhotoViewController ()<QMBParallaxScrollViewControllerDelegate, KIImagePagerDataSource>
+@interface ParallaxPhotoViewController ()<RDParallaxControllerDelegate, KIImagePagerDataSource>
 @property (nonatomic, weak) IBOutlet RDParallaxController *parallaxController;
 @property (nonatomic, weak) IBOutlet KIImagePager *imagePagerView;
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
@@ -45,8 +45,8 @@
 
 #pragma mark - QMBParallaxScrollViewControllerDelegate
 
-- (void)parallaxScrollViewController:(RDParallaxController *)controller didChangeState:(QMBParallaxState)state{
-    self.imagePagerView.slideshowTimeInterval = controller.state == QMBParallaxStateFullSize ? 0 : 3;
+- (void)parallaxScrollViewController:(RDParallaxController *)controller didChangeState:(RDParallaxState)state{
+    self.imagePagerView.slideshowTimeInterval = controller.state == RDParallaxStateFullSize ? 0 : 3;
 }
 
 - (UIViewContentMode)contentModeForImage:(NSUInteger)image {

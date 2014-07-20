@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import "RDParallaxController.h"
 
-@interface ViewController ()<QMBParallaxScrollViewControllerDelegate>
+@interface ViewController ()<RDParallaxControllerDelegate>
 @property (nonatomic, weak) IBOutlet RDParallaxController *parallaxController;
 @property (nonatomic, weak) IBOutlet UIImageView *topView;
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
