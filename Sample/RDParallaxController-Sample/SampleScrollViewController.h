@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "QMBParallaxScrollViewController.h"
 
-@interface SampleScrollViewController : UIViewController<QMBParallaxScrollViewHolder, UIScrollViewDelegate, UIWebViewDelegate>
+@interface SampleScrollViewController : UIViewController<UIScrollViewDelegate, UIWebViewDelegate>
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UIWebView *webView;
 

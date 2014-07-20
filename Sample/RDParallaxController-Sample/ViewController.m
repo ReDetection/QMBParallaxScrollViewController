@@ -7,33 +7,36 @@
 //
 
 #import "ViewController.h"
-#import "SampleScrollViewController.h"
+#import "RDParallaxController.h"
 #import "SampleTableViewController.h"
-#import "FXBlurView.h"
 
-@interface ViewController ()
-
+@interface ViewController ()<QMBParallaxScrollViewControllerDelegate>
+@property (nonatomic, weak) IBOutlet RDParallaxController *parallaxController;
+@property (nonatomic, strong) UIViewController *topViewController;
+@property (nonatomic, strong) SampleTableViewController *sampleTableViewController;
 @end
 
 @implementation ViewController
 
-
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     
-    SampleTableViewController *sampleTableViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SampleTableViewController"];
+    //TODO get rid of topViewController, place that view into storyboard directly
     
-    SampleTopViewController *sampleTopViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SampleTopViewController"];
-    self.delegate = self;
+    self.sampleTableViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SampleTableViewController"];
     
-    [self setupWithTopViewController:sampleTopViewController andTopHeight:200 andBottomViewController:sampleTableViewController];
+    self.topViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SampleTopViewController"];
+    self.parallaxController.delegate = self;
     
-    [self setOverPanHeight:250];
-    
-    [sampleTopViewController.imageView.image blurredImageWithRadius:10.0 iterations:1.0 tintColor:[UIColor blackColor]];
-    
-    [self setNeedsStatusBarAppearanceUpdate];
+    [self.view addSubview:self.sampleTableViewController.tableView];
+    [self.view addSubview:self.topViewController.view];
+
+    [self.parallaxController setupWithTopView:self.topViewController.view topHeight:200 bottomView:self.sampleTableViewController.tableView];
+    self.parallaxController.overPanHeight = 250;
+
+    if ([UIDevice currentDevice].systemVersion.floatValue >= 7) {
+        [self setNeedsStatusBarAppearanceUpdate];
+    }
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle{
@@ -42,18 +45,18 @@
 
 #pragma mark - QMBParallaxScrollViewControllerDelegate
 
-- (void)parallaxScrollViewController:(QMBParallaxScrollViewController *)controller didChangeState:(QMBParallaxState)state{
-    
+- (void)parallaxScrollViewController:(RDParallaxController *)controller didChangeState:(QMBParallaxState)state {
     NSLog(@"didChangeState %d",state);
-    [self.navigationController setNavigationBarHidden:self.state == QMBParallaxStateFullSize animated:YES];
+    [self.navigationController setNavigationBarHidden:state == QMBParallaxStateFullSize animated:YES];
     
 }
 
-- (void)parallaxScrollViewController:(QMBParallaxScrollViewController *)controller didChangeTopHeight:(CGFloat)height{
-    [self.topViewController.view setAlpha:MAX(.7,height/self.fullHeight)];
+- (void)parallaxScrollViewController:(RDParallaxController *)controller didChangeTopHeight:(CGFloat)height {
+    [self.topViewController.view setAlpha:MAX(.7f,height/self.parallaxController.fullHeight)];
 }
 
-- (void)parallaxScrollViewController:(QMBParallaxScrollViewController *)controller didChangeGesture:(QMBParallaxGesture)newGesture oldGesture:(QMBParallaxGesture)oldGesture{
+- (void)parallaxScrollViewController:(RDParallaxController *)controller didChangeGesture:(QMBParallaxGesture)newGesture oldGesture:(QMBParallaxGesture)oldGesture {
     
 }
+
 @end

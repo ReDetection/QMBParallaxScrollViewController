@@ -7,8 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "QMBParallaxScrollViewController.h"
 
-@interface SampleTableViewController : UITableViewController<QMBParallaxScrollViewHolder>
+@interface SampleTableViewController : UITableViewController
 
 @end
