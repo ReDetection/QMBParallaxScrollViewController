@@ -33,38 +33,30 @@
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView appearanceType="aqua" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NGC6559.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Sls-OV-NCn">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="Sls-OV-NCn" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="MIb-Pg-PE0"/>
+                            <constraint firstItem="Sls-OV-NCn" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="Mjr-Qm-oAq"/>
+                            <constraint firstItem="Sja-6h-qhK" firstAttribute="top" secondItem="Sls-OV-NCn" secondAttribute="bottom" constant="368" id="PIT-rJ-f5u"/>
+                            <constraint firstAttribute="trailing" secondItem="Sls-OV-NCn" secondAttribute="trailing" id="ysY-Ue-rlJ"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Parallax Sample" id="82o-By-0Xq"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
                         <outlet property="parallaxController" destination="44b-Ky-mn0" id="NY7-Lt-6CI"/>
+                        <outlet property="topView" destination="Sls-OV-NCn" id="SLT-pX-xko"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
                 <customObject id="44b-Ky-mn0" customClass="RDParallaxController"/>
             </objects>
-        </scene>
-        <!--Sample Top View Controller-->
-        <scene sceneID="LnE-Ks-DcG">
-            <objects>
-                <viewController storyboardIdentifier="SampleTopViewController" automaticallyAdjustsScrollViewInsets="NO" id="x3Y-bK-4hT" customClass="SampleTopViewController" sceneMemberID="viewController">
-                    <imageView key="view" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NGC6559.jpg" id="FX3-Qr-sRy">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    </imageView>
-                    <toolbarItems/>
-                    <nil key="simulatedStatusBarMetrics"/>
-                    <nil key="simulatedTopBarMetrics"/>
-                    <nil key="simulatedBottomBarMetrics"/>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="320" height="200"/>
-                    <connections>
-                        <outlet property="imageView" destination="FX3-Qr-sRy" id="8ja-W8-3v8"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="GBH-Kq-q8t" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="426" y="-150"/>
+            <point key="canvasLocation" x="53" y="-94"/>
         </scene>
         <!--Parallax Photo View Controller - Sample Image Browser-->
         <scene sceneID="1o2-IH-r53">

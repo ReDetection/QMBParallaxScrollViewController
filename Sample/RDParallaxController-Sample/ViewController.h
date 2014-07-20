@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SampleTopViewController.h"
 
 @interface ViewController : UIViewController
 
