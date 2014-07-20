@@ -23,7 +23,7 @@
 		36F38710197B68CA0003D3B2 /* Thumbs.db in Resources */ = {isa = PBXBuildFile; fileRef = 36F386F6197B68CA0003D3B2 /* Thumbs.db */; };
 		36F38711197B68CA0003D3B2 /* SamplePhotoBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36F386F8197B68CA0003D3B2 /* SamplePhotoBrowserViewController.m */; };
 		36F38712197B68CA0003D3B2 /* SampleScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36F386FA197B68CA0003D3B2 /* SampleScrollViewController.m */; };
-		36F38713197B68CA0003D3B2 /* SampleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36F386FC197B68CA0003D3B2 /* SampleTableViewController.m */; };
+		36F38713197B68CA0003D3B2 /* SampleTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36F386FC197B68CA0003D3B2 /* SampleTableController.m */; };
 		36F38715197B68CA0003D3B2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36F38700197B68CA0003D3B2 /* ViewController.m */; };
 		36F38716197B68CA0003D3B2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 36F38701197B68CA0003D3B2 /* InfoPlist.strings */; };
 		36F38717197B68CA0003D3B2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 36F38703197B68CA0003D3B2 /* main.m */; };
@@ -58,8 +58,8 @@
 		36F386F8197B68CA0003D3B2 /* SamplePhotoBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SamplePhotoBrowserViewController.m; sourceTree = "<group>"; };
 		36F386F9197B68CA0003D3B2 /* SampleScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleScrollViewController.h; sourceTree = "<group>"; };
 		36F386FA197B68CA0003D3B2 /* SampleScrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleScrollViewController.m; sourceTree = "<group>"; };
-		36F386FB197B68CA0003D3B2 /* SampleTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleTableViewController.h; sourceTree = "<group>"; };
-		36F386FC197B68CA0003D3B2 /* SampleTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleTableViewController.m; sourceTree = "<group>"; };
+		36F386FB197B68CA0003D3B2 /* SampleTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleTableController.h; sourceTree = "<group>"; };
+		36F386FC197B68CA0003D3B2 /* SampleTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleTableController.m; sourceTree = "<group>"; };
 		36F386FF197B68CA0003D3B2 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		36F38700197B68CA0003D3B2 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		36F38702197B68CA0003D3B2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -118,8 +118,8 @@
 				36F386F8197B68CA0003D3B2 /* SamplePhotoBrowserViewController.m */,
 				36F386F9197B68CA0003D3B2 /* SampleScrollViewController.h */,
 				36F386FA197B68CA0003D3B2 /* SampleScrollViewController.m */,
-				36F386FB197B68CA0003D3B2 /* SampleTableViewController.h */,
-				36F386FC197B68CA0003D3B2 /* SampleTableViewController.m */,
+				36F386FB197B68CA0003D3B2 /* SampleTableController.h */,
+				36F386FC197B68CA0003D3B2 /* SampleTableController.m */,
 				36F386FF197B68CA0003D3B2 /* ViewController.h */,
 				36F38700197B68CA0003D3B2 /* ViewController.m */,
 				36F38701197B68CA0003D3B2 /* InfoPlist.strings */,
@@ -297,7 +297,7 @@
 				36F386E1197B688F0003D3B2 /* RDParallaxController.m in Sources */,
 				36F38711197B68CA0003D3B2 /* SamplePhotoBrowserViewController.m in Sources */,
 				36F38708197B68CA0003D3B2 /* ParallaxPhotoViewController.m in Sources */,
-				36F38713197B68CA0003D3B2 /* SampleTableViewController.m in Sources */,
+				36F38713197B68CA0003D3B2 /* SampleTableController.m in Sources */,
 				36F38707197B68CA0003D3B2 /* ParallaxMapViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
