@@ -9,10 +9,9 @@
         <scene sceneID="URc-ll-dre">
             <objects>
                 <navigationController definesPresentationContext="YES" id="kNe-aI-dB1" sceneMemberID="viewController">
-                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ouh-3Y-rQb">
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </navigationBar>
                     <connections>
                         <segue destination="vXZ-lx-hvc" kind="relationship" relationship="rootViewController" id="LRB-vw-bvo"/>
@@ -40,7 +39,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="mapCell" textLabel="m2m-Bp-hSc" style="IBUITableViewCellStyleDefault" id="Eoh-Zf-jIG">
-                                        <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Eoh-Zf-jIG" id="Ros-6J-S5c">
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
@@ -60,7 +59,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell appearanceType="aqua" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="galleryCell" textLabel="7MO-5w-SpL" style="IBUITableViewCellStyleDefault" id="F33-fu-Eba">
-                                        <rect key="frame" x="0.0" y="130" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="66" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="F33-fu-Eba" id="2jJ-Id-nmA">
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
@@ -140,7 +139,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BJU-Wh-9Hv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1705" y="-150"/>
+            <point key="canvasLocation" x="890" y="340"/>
         </scene>
         <!--Parallax Map View Controller - Map View Sample-->
         <scene sceneID="1ii-eB-8tl">
@@ -154,28 +153,63 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <mapView appearanceType="aqua" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="j8H-6h-C37">
-                                <rect key="frame" x="0.0" y="63" width="320" height="132"/>
+                            <scrollView appearanceType="aqua" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t48-5s-4Bw">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sample Scroll View" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="80v-SI-ugF">
+                                        <rect key="frame" x="20" y="18" width="280" height="21"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Use any UIScrollView " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7tU-kp-Ure">
+                                        <rect key="frame" x="20" y="61" width="280" height="38"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PuF-bQ-fWr">
+                                        <rect key="frame" x="20" y="53" width="300" height="1"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.94856295619999997" alpha="1" colorSpace="calibratedWhite"/>
+                            </scrollView>
+                            <mapView appearanceType="aqua" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="j8H-6h-C37">
+                                <rect key="frame" x="0.0" y="64" width="320" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="fkv-3V-YKn"/>
+                                </constraints>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="j8H-6h-C37" firstAttribute="top" secondItem="fen-h0-bjw" secondAttribute="bottom" id="7gm-ry-fce"/>
+                            <constraint firstAttribute="trailing" secondItem="j8H-6h-C37" secondAttribute="trailing" id="C0D-Wl-KgG"/>
+                            <constraint firstItem="t48-5s-4Bw" firstAttribute="top" secondItem="fen-h0-bjw" secondAttribute="bottom" id="JTZ-te-eIL"/>
+                            <constraint firstItem="92f-nQ-pmt" firstAttribute="top" secondItem="t48-5s-4Bw" secondAttribute="bottom" id="LIu-ME-trc"/>
+                            <constraint firstItem="t48-5s-4Bw" firstAttribute="leading" secondItem="WaJ-Bs-6e7" secondAttribute="leading" id="ZdX-BR-WaW"/>
+                            <constraint firstAttribute="trailing" secondItem="t48-5s-4Bw" secondAttribute="trailing" id="bge-B5-cLD"/>
+                            <constraint firstItem="j8H-6h-C37" firstAttribute="leading" secondItem="WaJ-Bs-6e7" secondAttribute="leading" id="qAK-rn-CVC"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Map View Sample" id="mxQ-zL-bfj">
                         <barButtonItem key="leftBarButtonItem" style="done" systemItem="done" id="UPv-cO-u6s">
                             <connections>
-                                <action selector="dismiss:" destination="0Fy-b6-Tpq" id="ewM-Ot-8UI"/>
+                                <action selector="dismiss:" destination="0Fy-b6-Tpq" id="cOH-x4-2oN"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="j8H-6h-C37" id="QGV-aS-Kh8"/>
                         <outlet property="parallaxController" destination="QCl-Ee-CYO" id="Pj8-V0-WYc"/>
+                        <outlet property="scrollView" destination="t48-5s-4Bw" id="uWh-CK-wMl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mE6-Gr-o1G" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <customObject id="QCl-Ee-CYO" customClass="RDParallaxController"/>
             </objects>
-            <point key="canvasLocation" x="1705" y="-911"/>
+            <point key="canvasLocation" x="890" y="-499"/>
         </scene>
         <!--Sample Photo Browser View Controller-->
         <scene sceneID="Y3D-se-Otr">
@@ -200,76 +234,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JyD-1f-ECw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2090" y="-150"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="Sy4-u3-lYb">
-            <objects>
-                <navigationController storyboardIdentifier="ParallaxMapViewController" definesPresentationContext="YES" id="6mw-wH-fui" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Mkg-bN-BDo">
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="0Fy-b6-Tpq" kind="relationship" relationship="rootViewController" id="ot8-zU-QW4"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ER5-NN-bTI" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1269" y="-911"/>
-        </scene>
-        <!--Sample Scroll View Controller-->
-        <scene sceneID="qqM-fY-i48">
-            <objects>
-                <viewController storyboardIdentifier="SampleScrollViewController" automaticallyAdjustsScrollViewInsets="NO" id="D9D-Eh-0yV" customClass="SampleScrollViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Mxq-Gy-BQs"/>
-                        <viewControllerLayoutGuide type="bottom" id="I7G-iJ-14X"/>
-                    </layoutGuides>
-                    <scrollView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" id="BIz-jt-Gmk">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sample Scroll View" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7eO-tp-Gnz">
-                                <rect key="frame" x="20" y="20" width="280" height="21"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Use any UIScrollView " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bk2-8v-8GF">
-                                <rect key="frame" x="20" y="69" width="280" height="38"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="W4H-89-asI">
-                                <rect key="frame" x="20" y="60" width="300" height="1"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="0.94856295620437958" alpha="1" colorSpace="calibratedWhite"/>
-                    </scrollView>
-                    <toolbarItems/>
-                    <connections>
-                        <outlet property="scrollView" destination="BIz-jt-Gmk" id="u3v-7P-Xq5"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="aZL-q3-YaT" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="890" y="183"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="n3m-TM-NV5">
-            <objects>
-                <navigationController storyboardIdentifier="ParallaxPhotoViewController" definesPresentationContext="YES" id="MTE-L8-YEy" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="9xj-A5-aIU">
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="bGI-0R-JmJ" kind="relationship" relationship="rootViewController" id="SyO-wd-SDq"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bRY-SN-Ggc" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1269" y="-150"/>
+            <point key="canvasLocation" x="1480" y="642"/>
         </scene>
     </scenes>
     <resources>
@@ -280,8 +245,4 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
-    <inferredMetricsTieBreakers>
-        <segue reference="Qm8-fn-f2M"/>
-        <segue reference="9iO-NE-A9c"/>
-    </inferredMetricsTieBreakers>
 </document>
