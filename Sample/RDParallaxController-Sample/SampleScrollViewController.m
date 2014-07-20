@@ -38,12 +38,6 @@
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://github.com"]]];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 - (void)dealloc{
     [self.webView.scrollView removeObserver:self forKeyPath:@"contentSize" context:nil];
 }
@@ -63,17 +57,7 @@
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
-    
-    
-    
 
-}
-
-#pragma mark - QMBParallaxScrollViewHolder
-
-- (UIScrollView *)scrollViewForParallexController{
-
-    return self.scrollView;
 }
 
 - (IBAction)closeButtonTouchUpInside:(id)sender{

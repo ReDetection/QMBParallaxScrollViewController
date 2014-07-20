@@ -6,27 +6,25 @@
 //  Copyright (c) 2013 Toni Möckel. All rights reserved.
 //
 
+#import <MapKit/MapKit.h>
 #import "ParallaxMapViewController.h"
-#import "SamplePhotoBrowserViewController.h"
 #import "SampleScrollViewController.h"
+#import "RDParallaxController.h"
 
 @interface ParallaxMapViewController ()
-
+@property (nonatomic, weak) IBOutlet RDParallaxController *parallaxController;
+@property (nonatomic, weak) IBOutlet MKMapView *mapView;
 @end
 
 @implementation ParallaxMapViewController
 
-
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-    UIViewController *sampleMapViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MapViewController"];
-    
+
     SampleScrollViewController *sampleBottomViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SampleScrollViewController"];
-    
-    [self setupWithTopViewController:sampleMapViewController andTopHeight:200 andBottomViewController:sampleBottomViewController];
-    
-    self.fullHeight = self.view.frame.size.height-50.0f;
+
+    [self.parallaxController setupWithTopView:self.mapView topHeight:200 bottomView:sampleBottomViewController.scrollView];
+    self.parallaxController.fullHeight = self.view.frame.size.height-50.0f;
 }
 
 - (IBAction) dismiss:(id)sender{
