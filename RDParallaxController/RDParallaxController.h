@@ -1,6 +1,6 @@
 //
-//  QMBParallaxController.h
-//  QMBParallaxScrollView-Sample
+//  RDParallaxController.h
+//  RDParallaxController-Sample
 //
 //  Created by Toni Möckel on 02.11.13.
 //  Copyright (c) 2013 Toni Möckel. All rights reserved.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class QMBParallaxController;
+@class RDParallaxController;
 
 typedef NS_ENUM(NSUInteger, QMBParallaxState) {
     QMBParallaxStateVisible = 0,
@@ -30,23 +30,23 @@ typedef NS_ENUM(NSUInteger, QMBParallaxGesture) {
  * Callback when the user tapped the top-view 
  * sender is usually the UITapGestureRecognizer instance
  */
-- (void) parallaxScrollViewController:(QMBParallaxController *) controller didChangeGesture:(QMBParallaxGesture)newGesture oldGesture:(QMBParallaxGesture)oldGesture;
+- (void) parallaxScrollViewController:(RDParallaxController *) controller didChangeGesture:(QMBParallaxGesture)newGesture oldGesture:(QMBParallaxGesture)oldGesture;
 
 /**
  * Callback when the state changed to QMBParallaxStateFullSize, QMBParallaxStateVisible or QMBParallaxStateHidden
  */
-- (void) parallaxScrollViewController:(QMBParallaxController *) controller didChangeState:(QMBParallaxState) state;
+- (void) parallaxScrollViewController:(RDParallaxController *) controller didChangeState:(QMBParallaxState) state;
 
 /**
  * Callback when the top height changed
  */
-- (void) parallaxScrollViewController:(QMBParallaxController *) controller didChangeTopHeight:(CGFloat) height;
+- (void) parallaxScrollViewController:(RDParallaxController *) controller didChangeTopHeight:(CGFloat) height;
 
 @end
 
 
 
-@interface QMBParallaxController : NSObject<UIGestureRecognizerDelegate>
+@interface RDParallaxController : NSObject<UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) id<QMBParallaxScrollViewControllerDelegate> delegate;
 

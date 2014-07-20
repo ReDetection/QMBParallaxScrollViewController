@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:QMBParallaxScrollView-Sample.xcodeproj">
+      location = "self:RDParallaxController-Sample.xcodeproj">
    </FileRef>
 </Workspace>

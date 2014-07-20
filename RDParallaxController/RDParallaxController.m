@@ -1,14 +1,14 @@
 //
-//  QMBParallaxController.m
-//  QMBParallaxScrollView-Sample
+//  RDParallaxController.m
+//  RDParallaxController-Sample
 //
 //  Created by Toni Möckel on 02.11.13.
 //  Copyright (c) 2013 Toni Möckel. All rights reserved.
 //
 
-#import "QMBParallaxController.h"
+#import "RDParallaxController.h"
 
-@interface QMBParallaxController (){
+@interface RDParallaxController (){
     BOOL _isAnimating;
     float _lastOffsetY;
 }
@@ -25,9 +25,9 @@
 
 @end
 
-@implementation QMBParallaxController
+@implementation RDParallaxController
 
-#pragma mark - QMBParallaxController Methods
+#pragma mark - RDParallaxController Methods
 
 - (void)setupWithTopView:(UIView *)topView topHeight:(CGFloat)height bottomView:(UIScrollView *)bottomView {
 

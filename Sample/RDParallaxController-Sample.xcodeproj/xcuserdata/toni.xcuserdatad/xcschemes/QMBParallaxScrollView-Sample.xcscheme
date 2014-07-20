@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E288C2DA182560920044F2B2"
-               BuildableName = "QMBParallaxScrollView-Sample.app"
-               BlueprintName = "QMBParallaxScrollView-Sample"
-               ReferencedContainer = "container:QMBParallaxScrollView-Sample.xcodeproj">
+               BuildableName = "RDParallaxController-Sample.app"
+               BlueprintName = "RDParallaxController-Sample"
+               ReferencedContainer = "container:RDParallaxController-Sample.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E288C2FE182560920044F2B2"
-               BuildableName = "QMBParallaxScrollView-SampleTests.xctest"
-               BlueprintName = "QMBParallaxScrollView-SampleTests"
-               ReferencedContainer = "container:QMBParallaxScrollView-Sample.xcodeproj">
+               BuildableName = "RDParallaxController-SampleTests.xctest"
+               BlueprintName = "RDParallaxController-SampleTests"
+               ReferencedContainer = "container:RDParallaxController-Sample.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -43,9 +43,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E288C2DA182560920044F2B2"
-            BuildableName = "QMBParallaxScrollView-Sample.app"
-            BlueprintName = "QMBParallaxScrollView-Sample"
-            ReferencedContainer = "container:QMBParallaxScrollView-Sample.xcodeproj">
+            BuildableName = "RDParallaxController-Sample.app"
+            BlueprintName = "RDParallaxController-Sample"
+            ReferencedContainer = "container:RDParallaxController-Sample.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -62,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E288C2DA182560920044F2B2"
-            BuildableName = "QMBParallaxScrollView-Sample.app"
-            BlueprintName = "QMBParallaxScrollView-Sample"
-            ReferencedContainer = "container:QMBParallaxScrollView-Sample.xcodeproj">
+            BuildableName = "RDParallaxController-Sample.app"
+            BlueprintName = "RDParallaxController-Sample"
+            ReferencedContainer = "container:RDParallaxController-Sample.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -80,9 +80,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E288C2DA182560920044F2B2"
-            BuildableName = "QMBParallaxScrollView-Sample.app"
-            BlueprintName = "QMBParallaxScrollView-Sample"
-            ReferencedContainer = "container:QMBParallaxScrollView-Sample.xcodeproj">
+            BuildableName = "RDParallaxController-Sample.app"
+            BlueprintName = "RDParallaxController-Sample"
+            ReferencedContainer = "container:RDParallaxController-Sample.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
