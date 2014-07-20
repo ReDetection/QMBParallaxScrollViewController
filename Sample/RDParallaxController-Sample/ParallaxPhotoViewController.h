@@ -6,10 +6,7 @@
 //  Copyright (c) 2013 Toni Möckel. All rights reserved.
 //
 
-#import "QMBParallaxScrollViewController.h"
 
-@interface ParallaxPhotoViewController : QMBParallaxScrollViewController<QMBParallaxScrollViewControllerDelegate>
-
-- (IBAction) dismiss:(id)sender;
+@interface ParallaxPhotoViewController : UIViewController
 
 @end

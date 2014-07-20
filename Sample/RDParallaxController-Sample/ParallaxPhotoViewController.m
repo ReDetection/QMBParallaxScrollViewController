@@ -6,47 +6,51 @@
 //  Copyright (c) 2013 Toni Möckel. All rights reserved.
 //
 
+#import "RDParallaxController.h"
 #import "ParallaxPhotoViewController.h"
-#import "SamplePhotoBrowserViewController.h"
-#import "SampleScrollViewController.h"
+#import "KIImagePager.h"
 
 
-@interface ParallaxPhotoViewController ()
+@interface ParallaxPhotoViewController ()<QMBParallaxScrollViewControllerDelegate, KIImagePagerDataSource>
+@property (nonatomic, weak) IBOutlet RDParallaxController *parallaxController;
+@property (nonatomic, weak) IBOutlet KIImagePager *imagePagerView;
+@property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 
-@property (nonatomic, strong) SamplePhotoBrowserViewController *sampleTopViewController;
+@property (nonatomic, strong) NSArray *arrayWithImages;
 
 @end
 
 @implementation ParallaxPhotoViewController
 
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-    self.sampleTopViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SamplePhotoBrowserViewController"];
-    
-    SampleScrollViewController *sampleBottomViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SampleScrollViewController"];
-    
-    [self setupWithTopViewController:self.sampleTopViewController andTopHeight:200 andBottomViewController:sampleBottomViewController];
-    
-    self.delegate = self;
-    self.fullHeight = self.view.frame.size.height-50.0f;
+
+    self.arrayWithImages = @[
+        [UIImage imageNamed:@"NGC6559.jpg"],
+        [UIImage imageNamed:@"2.jpg"],
+        [UIImage imageNamed:@"3.jpg"],
+        [UIImage imageNamed:@"1.jpg"],
+        [UIImage imageNamed:@"4.jpg"],
+    ];
+
+    [self.parallaxController setupWithTopView:self.imagePagerView topHeight:200 bottomView:self.scrollView];
+    self.parallaxController.delegate = self;
+    self.parallaxController.fullHeight = self.scrollView.frame.size.height - 50.0f;
 }
 
-- (IBAction) dismiss:(id)sender{
-    [self dismissViewControllerAnimated:YES completion:nil];
+- (IBAction)dismiss:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - QMBParallaxScrollViewControllerDelegate
 
-- (void)parallaxScrollViewController:(QMBParallaxScrollViewController *)controller didChangeState:(QMBParallaxState)state{
-    if (self.state == QMBParallaxStateFullSize){
-        [self.navigationController setNavigationBarHidden:YES animated:YES];
-        ((KIImagePager *)self.sampleTopViewController.view).slideshowTimeInterval = 0;
-    }else {
-        [self.navigationController setNavigationBarHidden:NO animated:YES];
-        ((KIImagePager *)self.sampleTopViewController.view).slideshowTimeInterval = 3.0f;
-    }
+- (void)parallaxScrollViewController:(RDParallaxController *)controller didChangeState:(QMBParallaxState)state{
+    self.imagePagerView.slideshowTimeInterval = controller.state == QMBParallaxStateFullSize ? 0 : 3;
+}
+
+- (UIViewContentMode)contentModeForImage:(NSUInteger)image {
+    return UIViewContentModeScaleAspectFill;
 }
 
 

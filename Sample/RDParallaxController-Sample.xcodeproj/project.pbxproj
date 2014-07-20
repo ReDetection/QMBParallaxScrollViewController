@@ -21,7 +21,6 @@
 		36F3870E197B68CA0003D3B2 /* LICENCE in Resources */ = {isa = PBXBuildFile; fileRef = 36F386F4197B68CA0003D3B2 /* LICENCE */; };
 		36F3870F197B68CA0003D3B2 /* NGC6559.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 36F386F5197B68CA0003D3B2 /* NGC6559.jpg */; };
 		36F38710197B68CA0003D3B2 /* Thumbs.db in Resources */ = {isa = PBXBuildFile; fileRef = 36F386F6197B68CA0003D3B2 /* Thumbs.db */; };
-		36F38711197B68CA0003D3B2 /* SamplePhotoBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36F386F8197B68CA0003D3B2 /* SamplePhotoBrowserViewController.m */; };
 		36F38713197B68CA0003D3B2 /* SampleTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36F386FC197B68CA0003D3B2 /* SampleTableController.m */; };
 		36F38715197B68CA0003D3B2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 36F38700197B68CA0003D3B2 /* ViewController.m */; };
 		36F38716197B68CA0003D3B2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 36F38701197B68CA0003D3B2 /* InfoPlist.strings */; };
@@ -53,8 +52,6 @@
 		36F386F4197B68CA0003D3B2 /* LICENCE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENCE; sourceTree = "<group>"; };
 		36F386F5197B68CA0003D3B2 /* NGC6559.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = NGC6559.jpg; sourceTree = "<group>"; };
 		36F386F6197B68CA0003D3B2 /* Thumbs.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = Thumbs.db; sourceTree = "<group>"; };
-		36F386F7197B68CA0003D3B2 /* SamplePhotoBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SamplePhotoBrowserViewController.h; sourceTree = "<group>"; };
-		36F386F8197B68CA0003D3B2 /* SamplePhotoBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SamplePhotoBrowserViewController.m; sourceTree = "<group>"; };
 		36F386FB197B68CA0003D3B2 /* SampleTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleTableController.h; sourceTree = "<group>"; };
 		36F386FC197B68CA0003D3B2 /* SampleTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleTableController.m; sourceTree = "<group>"; };
 		36F386FF197B68CA0003D3B2 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
@@ -111,8 +108,6 @@
 				36F386EC197B68CA0003D3B2 /* RDParallaxController-Sample-Info.plist */,
 				36F386ED197B68CA0003D3B2 /* RDParallaxController-Sample-Prefix.pch */,
 				36F386EE197B68CA0003D3B2 /* Resources */,
-				36F386F7197B68CA0003D3B2 /* SamplePhotoBrowserViewController.h */,
-				36F386F8197B68CA0003D3B2 /* SamplePhotoBrowserViewController.m */,
 				36F386FB197B68CA0003D3B2 /* SampleTableController.h */,
 				36F386FC197B68CA0003D3B2 /* SampleTableController.m */,
 				36F386FF197B68CA0003D3B2 /* ViewController.h */,
@@ -289,7 +284,6 @@
 				36F38715197B68CA0003D3B2 /* ViewController.m in Sources */,
 				36F38704197B68CA0003D3B2 /* AppDelegate.m in Sources */,
 				36F386E1197B688F0003D3B2 /* RDParallaxController.m in Sources */,
-				36F38711197B68CA0003D3B2 /* SamplePhotoBrowserViewController.m in Sources */,
 				36F38708197B68CA0003D3B2 /* ParallaxPhotoViewController.m in Sources */,
 				36F38713197B68CA0003D3B2 /* SampleTableController.m in Sources */,
 				36F38707197B68CA0003D3B2 /* ParallaxMapViewController.m in Sources */,

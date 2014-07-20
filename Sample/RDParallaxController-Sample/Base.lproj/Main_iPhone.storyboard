@@ -127,17 +127,67 @@
                     <view key="view" contentMode="scaleToFill" id="R7u-z9-GK6">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <scrollView appearanceType="aqua" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZES-ZA-VKn">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sample Scroll View" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pdv-pz-Lun">
+                                        <rect key="frame" x="20" y="18" width="280" height="21"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Use any UIScrollView " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MBz-ap-VYf">
+                                        <rect key="frame" x="20" y="61" width="280" height="38"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s40-HI-q1x">
+                                        <rect key="frame" x="20" y="53" width="300" height="1"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.94856295619999997" alpha="1" colorSpace="calibratedWhite"/>
+                            </scrollView>
+                            <view appearanceType="aqua" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h9j-P3-L5r" customClass="KIImagePager">
+                                <rect key="frame" x="0.0" y="64" width="320" height="200"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="5ks-lc-Ogy"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="dataSource" destination="bGI-0R-JmJ" id="cqh-jg-CG7"/>
+                                </connections>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ZES-ZA-VKn" firstAttribute="top" secondItem="y3S-DP-mbZ" secondAttribute="bottom" id="CVn-eJ-FOP"/>
+                            <constraint firstAttribute="trailing" secondItem="ZES-ZA-VKn" secondAttribute="trailing" id="J5i-G1-bif"/>
+                            <constraint firstItem="h9j-P3-L5r" firstAttribute="leading" secondItem="R7u-z9-GK6" secondAttribute="leading" id="WOD-Gn-nyd"/>
+                            <constraint firstItem="Wwl-YW-bFL" firstAttribute="top" secondItem="ZES-ZA-VKn" secondAttribute="bottom" id="aB2-sR-edD"/>
+                            <constraint firstAttribute="trailing" secondItem="h9j-P3-L5r" secondAttribute="trailing" id="eWB-qL-VVm"/>
+                            <constraint firstItem="ZES-ZA-VKn" firstAttribute="leading" secondItem="R7u-z9-GK6" secondAttribute="leading" id="fz9-6c-DdO"/>
+                            <constraint firstItem="h9j-P3-L5r" firstAttribute="top" secondItem="y3S-DP-mbZ" secondAttribute="bottom" id="jgu-fz-m5P"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Sample Image Browser" id="KAQ-1J-DNF">
                         <barButtonItem key="leftBarButtonItem" style="done" systemItem="done" id="vtL-Wy-OqX">
                             <connections>
-                                <action selector="dismiss:" destination="bGI-0R-JmJ" id="wbw-rs-hhN"/>
+                                <action selector="dismiss:" destination="bGI-0R-JmJ" id="exA-hQ-INh"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="imagePagerView" destination="h9j-P3-L5r" id="ntv-XP-rTB"/>
+                        <outlet property="parallaxController" destination="eh7-71-1gx" id="z1B-7u-XjZ"/>
+                        <outlet property="scrollView" destination="ZES-ZA-VKn" id="Dcq-1r-UuQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BJU-Wh-9Hv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="eh7-71-1gx" customClass="RDParallaxController"/>
             </objects>
             <point key="canvasLocation" x="890" y="340"/>
         </scene>
@@ -210,31 +260,6 @@
                 <customObject id="QCl-Ee-CYO" customClass="RDParallaxController"/>
             </objects>
             <point key="canvasLocation" x="890" y="-499"/>
-        </scene>
-        <!--Sample Photo Browser View Controller-->
-        <scene sceneID="Y3D-se-Otr">
-            <objects>
-                <viewController storyboardIdentifier="SamplePhotoBrowserViewController" id="zbe-S1-Mo2" customClass="SamplePhotoBrowserViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Xmu-gd-dmu"/>
-                        <viewControllerLayoutGuide type="bottom" id="yYB-mE-4Gh"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="seP-ya-djd" customClass="KIImagePager">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="300"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                        <connections>
-                            <outlet property="dataSource" destination="zbe-S1-Mo2" id="5Sl-YB-Sdc"/>
-                            <outlet property="delegate" destination="zbe-S1-Mo2" id="TUv-pa-Jbj"/>
-                        </connections>
-                    </view>
-                    <nil key="simulatedStatusBarMetrics"/>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="320" height="300"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="JyD-1f-ECw" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1480" y="642"/>
         </scene>
     </scenes>
     <resources>
