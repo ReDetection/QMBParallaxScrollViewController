@@ -3,7 +3,7 @@
 //  RDParallaxController-Sample
 //
 //  Created by Toni Möckel on 06.11.13.
-//  Copyright (c) 2013 Toni Möckel. All rights reserved.
+//  Copyright (c) 2014 ReDetection. All rights reserved.
 //
 
 #import <MapKit/MapKit.h>
@@ -21,7 +21,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [self.parallaxController setupWithTopView:self.mapView topHeight:200 bottomView:self.scrollView];
     self.parallaxController.fullHeight = self.view.frame.size.height-50.0f;
 }
 

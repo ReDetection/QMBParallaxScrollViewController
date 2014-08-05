@@ -17,7 +17,6 @@
 @property (nonatomic, strong) UITapGestureRecognizer *bottomViewGestureRecognizer;
 @property (nonatomic, assign) CGFloat currentTopHeight;
 
-@property (nonatomic, assign, readwrite) CGFloat topHeight;
 @property (nonatomic, readwrite) RDParallaxState state;
 @property (nonatomic, readwrite) RDParallaxGesture lastGesture;
 
@@ -44,10 +43,10 @@
 
 #pragma mark - RDParallaxController Methods
 
-- (void)setupWithTopView:(UIView *)topView topHeight:(CGFloat)height bottomView:(UIScrollView *)bottomView {
+- (void)setTopHeight:(CGFloat)height {
     self.observersRegistered = NO;
-    self.topHeight = height;
-    [self changeTopHeight:height];
+    _topHeight = height;
+    [self changeCurrentTopHeight:height];
     [self setOverPanHeight:height * 1.5];
     [self checkAndSetup];
 }
@@ -61,7 +60,7 @@
     _bottomScrollView.alwaysBounceVertical = YES;
     self.fullHeight = _bottomScrollView.frame.size.height;
     [_bottomScrollView setUserInteractionEnabled:YES];
-    [self changeTopHeight:self.topHeight];
+    [self changeCurrentTopHeight:self.topHeight];
     [self checkAndSetup];
 }
 
@@ -131,7 +130,7 @@
     
 }
 
-- (void) changeTopHeight:(CGFloat) height{
+- (void)changeCurrentTopHeight:(CGFloat) height{
     self.topView.frame = CGRectMake(_bottomScrollView.frame.origin.x, _bottomScrollView.frame.origin.y, _bottomScrollView.frame.size.width, height);
     _bottomScrollView.contentInset = UIEdgeInsetsMake(height, 0, 0, 0);
     _currentTopHeight = height;
@@ -250,7 +249,7 @@
 
 
     [UIView animateWithDuration:.3 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        [self changeTopHeight:show ?  _fullHeight : _topHeight];
+        [self changeCurrentTopHeight:show ? _fullHeight : _topHeight];
 
     } completion:^(BOOL finished) {
         [_bottomScrollView setContentOffset:CGPointMake(0, -_bottomScrollView.contentInset.top) animated:NO];

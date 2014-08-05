@@ -112,6 +112,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
                 <customObject id="44b-Ky-mn0" customClass="RDParallaxController">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="topHeight">
+                            <integer key="value" value="200"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="bottomScrollView" destination="QyG-Ev-LTa" id="V7Q-Qd-wfd"/>
                         <outlet property="topView" destination="Sls-OV-NCn" id="7iq-cu-Dcp"/>
@@ -193,6 +198,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BJU-Wh-9Hv" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <customObject id="eh7-71-1gx" customClass="RDParallaxController">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="topHeight">
+                            <integer key="value" value="200"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="bottomScrollView" destination="ZES-ZA-VKn" id="qcn-QY-Bqd"/>
                         <outlet property="topView" destination="h9j-P3-L5r" id="eQM-ZS-geg"/>
@@ -268,6 +278,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mE6-Gr-o1G" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <customObject id="QCl-Ee-CYO" customClass="RDParallaxController">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="topHeight">
+                            <integer key="value" value="200"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="bottomScrollView" destination="t48-5s-4Bw" id="8WH-04-Gbf"/>
                         <outlet property="topView" destination="j8H-6h-C37" id="Vay-HG-ELZ"/>

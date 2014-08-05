@@ -3,7 +3,7 @@
 //  RDParallaxController-Sample
 //
 //  Created by Toni Möckel on 02.11.13.
-//  Copyright (c) 2013 Toni Möckel. All rights reserved.
+//  Copyright (c) 2014 ReDetection. All rights reserved.
 //
 
 #import "ViewController.h"
@@ -21,12 +21,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [self.parallaxController setupWithTopView:self.topView topHeight:200 bottomView:self.tableView];
     self.parallaxController.delegate = self;
     self.parallaxController.overPanHeight = 250;
 }
 
-#pragma mark - QMBParallaxScrollViewControllerDelegate
+#pragma mark - RDParallaxControllerDelegate
 
 - (void)parallaxScrollViewController:(RDParallaxController *)controller didChangeTopHeight:(CGFloat)height {
     [self.topView setAlpha:MAX(.7f,height/self.parallaxController.fullHeight)];

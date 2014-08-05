@@ -3,7 +3,7 @@
 //  RDParallaxController-Sample
 //
 //  Created by Toni Möckel on 07.11.13.
-//  Copyright (c) 2013 Toni Möckel. All rights reserved.
+//  Copyright (c) 2014 ReDetection. All rights reserved.
 //
 
 #import "RDParallaxController.h"
@@ -34,7 +34,6 @@
         [UIImage imageNamed:@"4.jpg"],
     ];
 
-    [self.parallaxController setupWithTopView:self.imagePagerView topHeight:200 bottomView:self.scrollView];
     self.parallaxController.delegate = self;
     self.parallaxController.fullHeight = self.scrollView.frame.size.height - 50.0f;
 }
