@@ -3,7 +3,7 @@
 //  RDParallaxController-Sample
 //
 //  Created by Toni Möckel on 02.11.13.
-//  Copyright (c) 2013 Toni Möckel. All rights reserved.
+//  Copyright (c) 2014 ReDetection. All rights reserved.
 //
 
 #import "RDParallaxController.h"
@@ -16,7 +16,6 @@
 @property (nonatomic, strong) UITapGestureRecognizer *topViewGestureRecognizer;
 @property (nonatomic, strong) UITapGestureRecognizer *bottomViewGestureRecognizer;
 @property (nonatomic, strong) UIScrollView *parallaxScrollView;
-@property (nonatomic, strong) UIView *topView;
 @property (nonatomic, assign) CGFloat currentTopHeight;
 
 @property (nonatomic, assign, readwrite) CGFloat topHeight;
@@ -27,17 +26,28 @@
 
 @implementation RDParallaxController
 
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.topViewGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+        [self.topViewGestureRecognizer setNumberOfTouchesRequired:1];
+        [self.topViewGestureRecognizer setNumberOfTapsRequired:1];
+
+        self.bottomViewGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleBottomTouch:)];
+        [self.bottomViewGestureRecognizer setNumberOfTouchesRequired:1];
+
+        [self addObserver:self forKeyPath:@"state" options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld) context:nil];
+    }
+    return self;
+}
+
 #pragma mark - RDParallaxController Methods
 
 - (void)setupWithTopView:(UIView *)topView topHeight:(CGFloat)height bottomView:(UIScrollView *)bottomView {
-
-    self.topView = topView;
     self.topHeight = height;
 
-    [topView setClipsToBounds:YES];
     [bottomView setClipsToBounds:YES];
 
-    [topView setAutoresizingMask:UIViewAutoresizingNone];
     _parallaxScrollView = bottomView;
     _parallaxScrollView.alwaysBounceVertical = YES;
     
@@ -47,20 +57,22 @@
     [self setOverPanHeight:height * 1.5];
     [self setFullHeight:_parallaxScrollView.frame.size.height];
 
-    self.topViewGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-    [self.topViewGestureRecognizer setNumberOfTouchesRequired:1];
-    [self.topViewGestureRecognizer setNumberOfTapsRequired:1];
-    [self.topView setUserInteractionEnabled:YES];
-    [self enableTapGestureTopView:YES];
-    
-    self.bottomViewGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleBottomTouch:)];
-    [self.bottomViewGestureRecognizer setNumberOfTouchesRequired:1];
     [bottomView setUserInteractionEnabled:YES];
 
     //Register Observer
     [_parallaxScrollView addObserver:self forKeyPath:@"contentOffset" options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld) context:nil];
-    [self addObserver:self forKeyPath:@"state" options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld) context:nil];
-    
+}
+
+- (void)setTopView:(UIView *)topView {
+    if ([[topView gestureRecognizers] containsObject:self.topViewGestureRecognizer]) {
+        [topView removeGestureRecognizer:self.topViewGestureRecognizer];
+    }
+    _topView = topView;
+    [topView setClipsToBounds:YES];
+    [topView setAutoresizingMask:UIViewAutoresizingNone];
+
+    [topView setUserInteractionEnabled:YES];
+    [self enableTapGestureTopView:YES];    //todo check config in the interface
 }
 
 #pragma mark - Observer

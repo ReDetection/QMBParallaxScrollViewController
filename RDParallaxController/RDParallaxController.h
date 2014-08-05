@@ -3,7 +3,7 @@
 //  RDParallaxController-Sample
 //
 //  Created by Toni Möckel on 02.11.13.
-//  Copyright (c) 2013 Toni Möckel. All rights reserved.
+//  Copyright (c) 2014 ReDetection. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -48,6 +48,7 @@ typedef NS_ENUM(NSUInteger, RDParallaxGesture) {
 
 @interface RDParallaxController : NSObject<UIGestureRecognizerDelegate>
 
+@property (nonatomic, strong) IBOutlet UIView *topView;
 @property (nonatomic, strong) id<RDParallaxControllerDelegate> delegate;
 
 @property (nonatomic, assign, readonly) CGFloat topHeight;
