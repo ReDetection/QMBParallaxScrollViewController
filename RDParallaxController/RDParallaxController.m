@@ -15,12 +15,13 @@
 
 @property (nonatomic, strong) UITapGestureRecognizer *topViewGestureRecognizer;
 @property (nonatomic, strong) UITapGestureRecognizer *bottomViewGestureRecognizer;
-@property (nonatomic, strong) UIScrollView *parallaxScrollView;
 @property (nonatomic, assign) CGFloat currentTopHeight;
 
 @property (nonatomic, assign, readwrite) CGFloat topHeight;
 @property (nonatomic, readwrite) RDParallaxState state;
 @property (nonatomic, readwrite) RDParallaxGesture lastGesture;
+
+@property (atomic, assign) BOOL observersRegistered;
 
 @end
 
@@ -36,7 +37,7 @@
         self.bottomViewGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleBottomTouch:)];
         [self.bottomViewGestureRecognizer setNumberOfTouchesRequired:1];
 
-        [self addObserver:self forKeyPath:@"state" options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld) context:nil];
+        [self addObserver:self forKeyPath:@"observersRegistered" options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld) context:nil];
     }
     return self;
 }
@@ -44,23 +45,24 @@
 #pragma mark - RDParallaxController Methods
 
 - (void)setupWithTopView:(UIView *)topView topHeight:(CGFloat)height bottomView:(UIScrollView *)bottomView {
+    self.observersRegistered = NO;
     self.topHeight = height;
-
-    [bottomView setClipsToBounds:YES];
-
-    _parallaxScrollView = bottomView;
-    _parallaxScrollView.alwaysBounceVertical = YES;
-    
-    //Configs
-    
     [self changeTopHeight:height];
     [self setOverPanHeight:height * 1.5];
-    [self setFullHeight:_parallaxScrollView.frame.size.height];
+    [self checkAndSetup];
+}
 
-    [bottomView setUserInteractionEnabled:YES];
+- (void)setBottomScrollView:(UIScrollView *)bottomView {
+    self.observersRegistered = NO;
+    [_bottomScrollView removeObserver:self forKeyPath:@"contentOffset"];
+    _bottomScrollView = bottomView;
 
-    //Register Observer
-    [_parallaxScrollView addObserver:self forKeyPath:@"contentOffset" options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld) context:nil];
+    [_bottomScrollView setClipsToBounds:YES];
+    _bottomScrollView.alwaysBounceVertical = YES;
+    self.fullHeight = _bottomScrollView.frame.size.height;
+    [_bottomScrollView setUserInteractionEnabled:YES];
+    [self changeTopHeight:self.topHeight];
+    [self checkAndSetup];
 }
 
 - (void)setTopView:(UIView *)topView {
@@ -73,32 +75,47 @@
 
     [topView setUserInteractionEnabled:YES];
     [self enableTapGestureTopView:YES];    //todo check config in the interface
+    [self checkAndSetup];
+}
+
+- (void)checkAndSetup {
+    if (self.topView != nil && self.bottomScrollView != nil) {
+        self.observersRegistered = YES;
+    }
 }
 
 #pragma mark - Observer
 
--(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if([keyPath isEqualToString:@"contentOffset"]){
         [self parallaxScrollViewDidScroll:[[change valueForKey:NSKeyValueChangeNewKey] CGPointValue]];
-    }
-    
-    if([keyPath isEqualToString:@"state"]){
-        if ([[change valueForKey:NSKeyValueChangeOldKey] intValue] == [[change valueForKey:NSKeyValueChangeNewKey] intValue]){
-            return;
-        }
-        if ([self.delegate respondsToSelector:@selector(parallaxScrollViewController:didChangeState:)]){
-            [self.delegate parallaxScrollViewController:self didChangeState:(RDParallaxState) [[change valueForKey:NSKeyValueChangeNewKey] intValue]];
+
+    } else if ([keyPath isEqualToString:@"state"]){
+        BOOL valuesAreEqual = [change[NSKeyValueChangeOldKey] intValue] == [change[NSKeyValueChangeNewKey] intValue];
+        BOOL shouldNotifyDelegate = [self.delegate respondsToSelector:@selector(parallaxScrollViewController:didChangeState:)];
+        if ( !valuesAreEqual && shouldNotifyDelegate){
+            [self.delegate parallaxScrollViewController:self didChangeState:(RDParallaxState) [change[NSKeyValueChangeNewKey] intValue]];
         }
 
-    }
+    } else if ([keyPath isEqualToString:@"observersRegistered"]) {
+        BOOL old = [change[NSKeyValueChangeOldKey] boolValue];
+        BOOL new = [change[NSKeyValueChangeNewKey] boolValue];
 
+        if (!old && new) {
+            [_bottomScrollView addObserver:self forKeyPath:@"contentOffset" options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld) context:nil];
+            [self addObserver:self forKeyPath:@"state" options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld) context:nil];
+
+        } else if (old && !new) {
+            [_bottomScrollView removeObserver:self forKeyPath:@"contentOffset"];
+            [self removeObserver:self forKeyPath:@"state"];
+        }
+    }
 }
 
 
 - (void)dealloc{
-    [_parallaxScrollView removeObserver:self forKeyPath:@"contentOffset"];
-    [self removeObserver:self forKeyPath:@"state"];
+    self.observersRegistered = NO;
+    [self removeObserver:self forKeyPath:@"observersRegistered"];
 }
 #pragma mark - Configs
 
@@ -115,8 +132,8 @@
 }
 
 - (void) changeTopHeight:(CGFloat) height{
-    self.topView.frame = CGRectMake(_parallaxScrollView.frame.origin.x, _parallaxScrollView.frame.origin.y, _parallaxScrollView.frame.size.width, height);
-    _parallaxScrollView.contentInset = UIEdgeInsetsMake(height, 0, 0, 0);
+    self.topView.frame = CGRectMake(_bottomScrollView.frame.origin.x, _bottomScrollView.frame.origin.y, _bottomScrollView.frame.size.width, height);
+    _bottomScrollView.contentInset = UIEdgeInsetsMake(height, 0, 0, 0);
     _currentTopHeight = height;
 
     if ([self.delegate respondsToSelector:@selector(parallaxScrollViewController:didChangeTopHeight:)]){
@@ -128,23 +145,23 @@
 
 - (void)parallaxScrollViewDidScroll:(CGPoint)contentOffset {
     
-    if (_parallaxScrollView.contentOffset.y > _lastOffsetY){
+    if (_bottomScrollView.contentOffset.y > _lastOffsetY){
         self.lastGesture = RDParallaxGestureScrollsUp;
     }else {
         self.lastGesture = RDParallaxGestureScrollsDown;
     }
-    _lastOffsetY = _parallaxScrollView.contentOffset.y;
+    _lastOffsetY = _bottomScrollView.contentOffset.y;
     
     if (_isAnimating){
         return;
     }
-    float y = _parallaxScrollView.contentOffset.y + _currentTopHeight;
+    float y = _bottomScrollView.contentOffset.y + _currentTopHeight;
     
     /*
      * if top-view height is full screen
      * dont resize top view -> Fullscreen Mode
      */
-    if (self.lastGesture == RDParallaxGestureScrollsDown && _parallaxScrollView.contentOffset.y < -_overPanHeight){
+    if (self.lastGesture == RDParallaxGestureScrollsDown && _bottomScrollView.contentOffset.y < -_overPanHeight){
         if (self.state != RDParallaxStateFullSize){
             [self showFullTopView:YES];
         }
@@ -165,7 +182,7 @@
 
         if (!self.topView.hidden) {
 
-            self.topView.frame = CGRectMake(_parallaxScrollView.frame.origin.x, _parallaxScrollView.frame.origin.y, _parallaxScrollView.frame.size.width, newHeight);
+            self.topView.frame = CGRectMake(_bottomScrollView.frame.origin.x, _bottomScrollView.frame.origin.y, _bottomScrollView.frame.size.width, newHeight);
 
             if ([self.delegate respondsToSelector:@selector(parallaxScrollViewController:didChangeTopHeight:)]){
                 [self.delegate parallaxScrollViewController:self didChangeTopHeight:self.topView.frame.size.height];
@@ -174,9 +191,9 @@
         }
         
         if (y >= _topHeight) {
-            _parallaxScrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+            _bottomScrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
         } else {
-            _parallaxScrollView.contentInset = UIEdgeInsetsMake(_currentTopHeight - y , 0, 0, 0);
+            _bottomScrollView.contentInset = UIEdgeInsetsMake(_currentTopHeight - y , 0, 0, 0);
         }
         
  
@@ -185,16 +202,16 @@
         [self.topView setHidden:NO];
 
         CGFloat newHeight = _currentTopHeight - y;
-        CGRect newFrame =  CGRectMake(_parallaxScrollView.frame.origin.x, _parallaxScrollView.frame.origin.y, _parallaxScrollView.frame.size.width, newHeight);
+        CGRect newFrame =  CGRectMake(_bottomScrollView.frame.origin.x, _bottomScrollView.frame.origin.y, _bottomScrollView.frame.size.width, newHeight);
         self.topView.frame = newFrame;
         if ([self.delegate respondsToSelector:@selector(parallaxScrollViewController:didChangeTopHeight:)]){
             [self.delegate parallaxScrollViewController:self didChangeTopHeight:self.topView.frame.size.height];
         }
         
-        _parallaxScrollView.contentInset = UIEdgeInsetsMake(_currentTopHeight, 0, 0, 0);
+        _bottomScrollView.contentInset = UIEdgeInsetsMake(_currentTopHeight, 0, 0, 0);
     }
 
-    [_parallaxScrollView setShowsVerticalScrollIndicator:self.topView.hidden];
+    [_bottomScrollView setShowsVerticalScrollIndicator:self.topView.hidden];
 }
 
 #pragma mark - User Interactions
@@ -228,16 +245,16 @@
 
     _isAnimating = YES;
     
-    [_parallaxScrollView setScrollEnabled:NO];
-    [_parallaxScrollView scrollRectToVisible:CGRectMake(0, 0, 0, 0) animated:YES];
+    [_bottomScrollView setScrollEnabled:NO];
+    [_bottomScrollView scrollRectToVisible:CGRectMake(0, 0, 0, 0) animated:YES];
 
 
     [UIView animateWithDuration:.3 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         [self changeTopHeight:show ?  _fullHeight : _topHeight];
 
     } completion:^(BOOL finished) {
-        [_parallaxScrollView setContentOffset:CGPointMake(0,- _parallaxScrollView.contentInset.top) animated:NO];
-        [_parallaxScrollView setScrollEnabled:YES];
+        [_bottomScrollView setContentOffset:CGPointMake(0, -_bottomScrollView.contentInset.top) animated:NO];
+        [_bottomScrollView setScrollEnabled:YES];
         _isAnimating = NO;
 
         self.state = show ? RDParallaxStateFullSize : RDParallaxStateVisible;

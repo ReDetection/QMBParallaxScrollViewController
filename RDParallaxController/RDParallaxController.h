@@ -48,7 +48,8 @@ typedef NS_ENUM(NSUInteger, RDParallaxGesture) {
 
 @interface RDParallaxController : NSObject<UIGestureRecognizerDelegate>
 
-@property (nonatomic, strong) IBOutlet UIView *topView;
+@property (nonatomic, weak) IBOutlet UIView *topView;
+@property (nonatomic, weak) IBOutlet UIScrollView *bottomScrollView;
 @property (nonatomic, strong) id<RDParallaxControllerDelegate> delegate;
 
 @property (nonatomic, assign, readonly) CGFloat topHeight;
