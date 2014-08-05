@@ -50,7 +50,7 @@ typedef NS_ENUM(NSUInteger, RDParallaxGesture) {
 
 @property (nonatomic, weak) IBOutlet UIView *topView;
 @property (nonatomic, weak) IBOutlet UIScrollView *bottomScrollView;
-@property (nonatomic, strong) id<RDParallaxControllerDelegate> delegate;
+@property (nonatomic, strong) IBOutlet id<RDParallaxControllerDelegate> delegate;
 
 @property (nonatomic, assign) CGFloat topHeight;
 @property (nonatomic, assign, setter = setFullHeight:) CGFloat fullHeight;

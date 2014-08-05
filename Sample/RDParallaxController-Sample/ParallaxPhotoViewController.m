@@ -34,7 +34,6 @@
         [UIImage imageNamed:@"4.jpg"],
     ];
 
-    self.parallaxController.delegate = self;
     self.parallaxController.fullHeight = self.scrollView.frame.size.height - 50.0f;
 }
 
@@ -42,11 +41,13 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-#pragma mark - QMBParallaxScrollViewControllerDelegate
+#pragma mark - RDParallaxControllerDelegate
 
 - (void)parallaxScrollViewController:(RDParallaxController *)controller didChangeState:(RDParallaxState)state{
     self.imagePagerView.slideshowTimeInterval = controller.state == RDParallaxStateFullSize ? 0 : 3;
 }
+
+#pragma mark - KIImagePagerDataSource
 
 - (UIViewContentMode)contentModeForImage:(NSUInteger)image {
     return UIViewContentModeScaleAspectFill;

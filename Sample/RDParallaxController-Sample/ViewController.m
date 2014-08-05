@@ -21,7 +21,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.parallaxController.delegate = self;
     self.parallaxController.overPanHeight = 250;
 }
 

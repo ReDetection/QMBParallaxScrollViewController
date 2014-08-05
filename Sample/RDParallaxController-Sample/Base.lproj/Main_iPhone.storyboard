@@ -119,6 +119,7 @@
                     </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="bottomScrollView" destination="QyG-Ev-LTa" id="V7Q-Qd-wfd"/>
+                        <outlet property="delegate" destination="vXZ-lx-hvc" id="PfY-US-gaL"/>
                         <outlet property="topView" destination="Sls-OV-NCn" id="7iq-cu-Dcp"/>
                     </connections>
                 </customObject>
@@ -205,6 +206,7 @@
                     </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="bottomScrollView" destination="ZES-ZA-VKn" id="qcn-QY-Bqd"/>
+                        <outlet property="delegate" destination="bGI-0R-JmJ" id="MKv-ts-5Ih"/>
                         <outlet property="topView" destination="h9j-P3-L5r" id="eQM-ZS-geg"/>
                     </connections>
                 </customObject>
