@@ -21,10 +21,13 @@
 @property (nonatomic, readwrite) RDParallaxGesture lastGesture;
 
 @property (atomic, assign) BOOL observersRegistered;
+@property (atomic, assign) BOOL calculateFullHeightFromBottomGap;
 
 @end
 
 @implementation RDParallaxController
+
+@synthesize fullHeight = _fullHeight;
 
 - (instancetype)init {
     self = [super init];
@@ -58,7 +61,7 @@
 
     [_bottomScrollView setClipsToBounds:YES];
     _bottomScrollView.alwaysBounceVertical = YES;
-    self.fullHeight = _bottomScrollView.frame.size.height;
+    self.bottomGap = self.bottomGap; //recalculate fullHeight
     [_bottomScrollView setUserInteractionEnabled:YES];
     [self changeCurrentTopHeight:self.topHeight];
     [self checkAndSetup];
@@ -118,10 +121,22 @@
 }
 #pragma mark - Configs
 
-- (void)setFullHeight:(CGFloat)fullHeight{
+- (void)setBottomGap:(CGFloat)bottomGap {
+    _bottomGap = bottomGap;
+    _calculateFullHeightFromBottomGap = YES;
+}
 
+- (void)setFullHeight:(CGFloat)fullHeight{
     _fullHeight = MAX(fullHeight, _topHeight);
-    
+    _calculateFullHeightFromBottomGap = NO;
+}
+
+- (CGFloat)fullHeight {
+    if (_calculateFullHeightFromBottomGap) {
+        return self.bottomScrollView.bounds.size.height - _bottomGap;
+    } else {
+        return _fullHeight;
+    }
 }
 
 - (void)setOverPanHeight:(CGFloat)overPanHeight{
@@ -249,7 +264,7 @@
 
 
     [UIView animateWithDuration:.3 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        [self changeCurrentTopHeight:show ? _fullHeight : _topHeight];
+        [self changeCurrentTopHeight:show ? self.fullHeight : _topHeight];
 
     } completion:^(BOOL finished) {
         [_bottomScrollView setContentOffset:CGPointMake(0, -_bottomScrollView.contentInset.top) animated:NO];

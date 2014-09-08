@@ -34,7 +34,6 @@
         [UIImage imageNamed:@"4.jpg"],
     ];
 
-    self.parallaxController.fullHeight = self.scrollView.frame.size.height - 50.0f;
 }
 
 - (IBAction)dismiss:(id)sender {

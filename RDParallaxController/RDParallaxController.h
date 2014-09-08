@@ -53,14 +53,22 @@ typedef NS_ENUM(NSUInteger, RDParallaxGesture) {
 @property (nonatomic, strong) IBOutlet id<RDParallaxControllerDelegate> delegate;
 
 @property (nonatomic, assign) CGFloat topHeight;
-@property (nonatomic, assign, setter = setFullHeight:) CGFloat fullHeight;
 @property (nonatomic, assign, setter = setOverPanHeight:) CGFloat overPanHeight;
 
 @property (nonatomic, readonly) RDParallaxState state;
-
-
 - (void)parallaxScrollViewDidScroll:(CGPoint)contentOffset;
-// configs
+
+/**
+* Configures topView height for RDParallaxStateFullSize state.
+* Setting this property will take effect on bottomGap
+*/
+@property (nonatomic, assign, setter = setFullHeight:) CGFloat fullHeight;
+
+/**
+* Setter calculates and sets fullHeight property. It is useful when configuring RDParallaxController from interface builder
+* This property is not KVO-compliant.
+*/
+@property (nonatomic, assign) CGFloat bottomGap;
 
 /**
  * Config to enable or disable top-view tap control

@@ -18,12 +18,6 @@
 
 @implementation ParallaxMapViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-
-    self.parallaxController.fullHeight = self.view.frame.size.height-50.0f;
-}
-
 - (IBAction)dismiss:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
