@@ -24,6 +24,13 @@
 <li>Developed for iOS7 (but should by compatible to iOS 5 - but not tested)</li>
 </ul>
 
+## Installation ##
+
+Add this line to the Podfile
+```
+pod 'RDParallaxController'
+```
+
 ## Configuring ##
 
 ![Config](Sample/storyboard.gif)
