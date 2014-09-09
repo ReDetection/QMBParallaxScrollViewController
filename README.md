@@ -9,6 +9,7 @@
 ## Features ##
 
 <ul>
+<li>Easy configuring right from interface builder. No code required!</li>
 <li>Supports any UIScrollView</li>
 <li>Use any UIView for the top view</li>
 <li>Rich delegation methods for:<ul>
@@ -22,6 +23,14 @@
 <li>Works with Storyboards</li>
 <li>Developed for iOS7 (but should by compatible to iOS 5 - but not tested)</li>
 </ul>
+
+## Configuring ##
+
+![Config](Sample/storyboard.gif)
+
+## Contributing ##
+
+Most annoying issue is #1, current workaround causes some blinks when popping view controller. I would appreciate if you find a good solution.
 
 ## More Parallax Views ##
 
