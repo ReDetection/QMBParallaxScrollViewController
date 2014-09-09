@@ -87,18 +87,18 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="Ibh-0T-cck"/>
+                                    <constraint firstAttribute="height" constant="200" placeholder="YES" id="Ibh-0T-cck"/>
                                 </constraints>
                             </imageView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="Sls-OV-NCn" firstAttribute="top" secondItem="7IP-Re-LhQ" secondAttribute="bottom" id="7b1-6W-PrW"/>
+                            <constraint firstItem="Sls-OV-NCn" firstAttribute="top" secondItem="7IP-Re-LhQ" secondAttribute="bottom" placeholder="YES" id="7b1-6W-PrW"/>
                             <constraint firstItem="Sja-6h-qhK" firstAttribute="top" secondItem="QyG-Ev-LTa" secondAttribute="bottom" id="Mxf-yg-cPg"/>
                             <constraint firstItem="QyG-Ev-LTa" firstAttribute="top" secondItem="7IP-Re-LhQ" secondAttribute="bottom" id="Zam-aA-gyx"/>
                             <constraint firstItem="QyG-Ev-LTa" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="fwQ-Kr-7ra"/>
                             <constraint firstAttribute="trailing" secondItem="QyG-Ev-LTa" secondAttribute="trailing" id="oUL-nw-s1a"/>
-                            <constraint firstItem="Sls-OV-NCn" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="uP9-RB-6Vu"/>
-                            <constraint firstAttribute="trailing" secondItem="Sls-OV-NCn" secondAttribute="trailing" id="z1Q-5L-IzT"/>
+                            <constraint firstItem="Sls-OV-NCn" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" placeholder="YES" id="uP9-RB-6Vu"/>
+                            <constraint firstAttribute="trailing" secondItem="Sls-OV-NCn" secondAttribute="trailing" placeholder="YES" id="z1Q-5L-IzT"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
@@ -166,7 +166,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="5ks-lc-Ogy"/>
+                                    <constraint firstAttribute="height" constant="200" placeholder="YES" id="5ks-lc-Ogy"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="dataSource" destination="bGI-0R-JmJ" id="cqh-jg-CG7"/>
@@ -177,11 +177,11 @@
                         <constraints>
                             <constraint firstItem="ZES-ZA-VKn" firstAttribute="top" secondItem="y3S-DP-mbZ" secondAttribute="bottom" id="CVn-eJ-FOP"/>
                             <constraint firstAttribute="trailing" secondItem="ZES-ZA-VKn" secondAttribute="trailing" id="J5i-G1-bif"/>
-                            <constraint firstItem="h9j-P3-L5r" firstAttribute="leading" secondItem="R7u-z9-GK6" secondAttribute="leading" id="WOD-Gn-nyd"/>
+                            <constraint firstItem="h9j-P3-L5r" firstAttribute="leading" secondItem="R7u-z9-GK6" secondAttribute="leading" placeholder="YES" id="WOD-Gn-nyd"/>
                             <constraint firstItem="Wwl-YW-bFL" firstAttribute="top" secondItem="ZES-ZA-VKn" secondAttribute="bottom" id="aB2-sR-edD"/>
-                            <constraint firstAttribute="trailing" secondItem="h9j-P3-L5r" secondAttribute="trailing" id="eWB-qL-VVm"/>
+                            <constraint firstAttribute="trailing" secondItem="h9j-P3-L5r" secondAttribute="trailing" placeholder="YES" id="eWB-qL-VVm"/>
                             <constraint firstItem="ZES-ZA-VKn" firstAttribute="leading" secondItem="R7u-z9-GK6" secondAttribute="leading" id="fz9-6c-DdO"/>
-                            <constraint firstItem="h9j-P3-L5r" firstAttribute="top" secondItem="y3S-DP-mbZ" secondAttribute="bottom" id="jgu-fz-m5P"/>
+                            <constraint firstItem="h9j-P3-L5r" firstAttribute="top" secondItem="y3S-DP-mbZ" secondAttribute="bottom" placeholder="YES" id="jgu-fz-m5P"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Sample Image Browser" id="KAQ-1J-DNF">
@@ -253,19 +253,19 @@
                             <mapView appearanceType="aqua" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="j8H-6h-C37">
                                 <rect key="frame" x="0.0" y="64" width="320" height="200"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="fkv-3V-YKn"/>
+                                    <constraint firstAttribute="height" constant="200" placeholder="YES" id="fkv-3V-YKn"/>
                                 </constraints>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="j8H-6h-C37" firstAttribute="top" secondItem="fen-h0-bjw" secondAttribute="bottom" id="7gm-ry-fce"/>
-                            <constraint firstAttribute="trailing" secondItem="j8H-6h-C37" secondAttribute="trailing" id="C0D-Wl-KgG"/>
+                            <constraint firstItem="j8H-6h-C37" firstAttribute="top" secondItem="fen-h0-bjw" secondAttribute="bottom" placeholder="YES" id="7gm-ry-fce"/>
+                            <constraint firstAttribute="trailing" secondItem="j8H-6h-C37" secondAttribute="trailing" placeholder="YES" id="C0D-Wl-KgG"/>
                             <constraint firstItem="t48-5s-4Bw" firstAttribute="top" secondItem="fen-h0-bjw" secondAttribute="bottom" id="JTZ-te-eIL"/>
                             <constraint firstItem="92f-nQ-pmt" firstAttribute="top" secondItem="t48-5s-4Bw" secondAttribute="bottom" id="LIu-ME-trc"/>
                             <constraint firstItem="t48-5s-4Bw" firstAttribute="leading" secondItem="WaJ-Bs-6e7" secondAttribute="leading" id="ZdX-BR-WaW"/>
                             <constraint firstAttribute="trailing" secondItem="t48-5s-4Bw" secondAttribute="trailing" id="bge-B5-cLD"/>
-                            <constraint firstItem="j8H-6h-C37" firstAttribute="leading" secondItem="WaJ-Bs-6e7" secondAttribute="leading" id="qAK-rn-CVC"/>
+                            <constraint firstItem="j8H-6h-C37" firstAttribute="leading" secondItem="WaJ-Bs-6e7" secondAttribute="leading" placeholder="YES" id="qAK-rn-CVC"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Map View Sample" id="mxQ-zL-bfj">
