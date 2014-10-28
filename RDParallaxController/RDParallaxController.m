@@ -40,6 +40,8 @@
         [self.bottomViewGestureRecognizer setNumberOfTouchesRequired:1];
 
         [self addObserver:self forKeyPath:@"observersRegistered" options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld) context:nil];
+        [self addObserver:self forKeyPath:@"bottomScrollView" options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld) context:nil];
+        [self addObserver:self forKeyPath:@"topView" options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld) context:nil];
     }
     return self;
 }
@@ -54,28 +56,28 @@
     [self checkAndSetup];
 }
 
-- (void)setBottomScrollView:(UIScrollView *)bottomView {
+- (void)updateOldBottomScrollView:(UIScrollView *)old withNew:(UIScrollView *)newOne {
+    [old removeObserver:self forKeyPath:@"contentOffset"];
     self.observersRegistered = NO;
-    [_bottomScrollView removeObserver:self forKeyPath:@"contentOffset"];
-    _bottomScrollView = bottomView;
 
-    [_bottomScrollView setClipsToBounds:YES];
-    _bottomScrollView.alwaysBounceVertical = YES;
+    [newOne setClipsToBounds:YES];
+    newOne.alwaysBounceVertical = YES;
     self.bottomGap = self.bottomGap; //recalculate fullHeight
-    [_bottomScrollView setUserInteractionEnabled:YES];
+    [newOne setUserInteractionEnabled:YES];
     [self changeCurrentTopHeight:self.topHeight];
     [self checkAndSetup];
 }
 
-- (void)setTopView:(UIView *)topView {
-    if ([[topView gestureRecognizers] containsObject:self.topViewGestureRecognizer]) {
-        [topView removeGestureRecognizer:self.topViewGestureRecognizer];
+- (void)updateOldTopView:(UIView *)old withNew:(UIView *)newOne {
+    self.observersRegistered = NO;
+    if ([[old gestureRecognizers] containsObject:self.topViewGestureRecognizer]) {
+        [old removeGestureRecognizer:self.topViewGestureRecognizer];
     }
-    _topView = topView;
-    [topView setClipsToBounds:YES];
-    [topView setAutoresizingMask:UIViewAutoresizingNone];
 
-    [topView setUserInteractionEnabled:YES];
+    [newOne setClipsToBounds:YES];
+    [newOne setAutoresizingMask:UIViewAutoresizingNone];
+
+    [newOne setUserInteractionEnabled:YES];
     [self enableTapGestureTopView:YES];    //todo check config in the interface
     [self checkAndSetup];
 }
@@ -85,6 +87,7 @@
         self.observersRegistered = YES;
     }
 }
+
 
 #pragma mark - Observer
 
@@ -125,6 +128,21 @@
             [_topView removeObserver:self forKeyPath:@"bounds"];
             [self removeObserver:self forKeyPath:@"state"];
         }
+
+    } else if ([keyPath isEqualToString:@"topView"]) {
+        UIView *old = change[NSKeyValueChangeOldKey];
+        UIView *new = change[NSKeyValueChangeNewKey];
+        old = [old isKindOfClass:[NSNull class]] ? nil : old;
+        new = [new isKindOfClass:[NSNull class]] ? nil : new;
+        [self updateOldTopView:old withNew:new];
+
+    } else if ([keyPath isEqualToString:@"bottomScrollView"]) {
+        UIScrollView *old = change[NSKeyValueChangeOldKey];
+        UIScrollView *new = change[NSKeyValueChangeNewKey];
+        old = [old isKindOfClass:[NSNull class]] ? nil : old;
+        new = [new isKindOfClass:[NSNull class]] ? nil : new;
+        [self updateOldBottomScrollView:old withNew:new];
+
     }
 }
 
@@ -132,6 +150,8 @@
 - (void)dealloc{
     self.observersRegistered = NO;
     [self removeObserver:self forKeyPath:@"observersRegistered"];
+    [self removeObserver:self forKeyPath:@"bottomScrollView"];
+    [self removeObserver:self forKeyPath:@"topView"];
 }
 #pragma mark - Configs
 
