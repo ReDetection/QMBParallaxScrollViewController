@@ -112,11 +112,6 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
                 <customObject id="44b-Ky-mn0" customClass="RDParallaxController">
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="topHeight">
-                            <integer key="value" value="200"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
                     <connections>
                         <outlet property="bottomScrollView" destination="QyG-Ev-LTa" id="V7Q-Qd-wfd"/>
                         <outlet property="delegate" destination="vXZ-lx-hvc" id="PfY-US-gaL"/>
@@ -201,9 +196,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BJU-Wh-9Hv" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <customObject id="eh7-71-1gx" customClass="RDParallaxController">
                     <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="topHeight">
-                            <integer key="value" value="200"/>
-                        </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="number" keyPath="bottomGap">
                             <integer key="value" value="50"/>
                         </userDefinedRuntimeAttribute>
@@ -286,9 +278,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mE6-Gr-o1G" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <customObject id="QCl-Ee-CYO" customClass="RDParallaxController">
                     <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="topHeight">
-                            <integer key="value" value="200"/>
-                        </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="number" keyPath="bottomGap">
                             <integer key="value" value="50"/>
                         </userDefinedRuntimeAttribute>

@@ -53,7 +53,6 @@ typedef NS_ENUM(NSUInteger, RDParallaxGesture) {
 @property (nonatomic, strong) IBOutlet UIScrollView *bottomScrollView;
 @property (nonatomic, strong) IBOutlet id<RDParallaxControllerDelegate> delegate;
 
-@property (nonatomic, assign) CGFloat topHeight;
 @property (nonatomic, assign, setter = setOverPanHeight:) CGFloat overPanHeight;
 
 @property (nonatomic, readonly) RDParallaxState state;

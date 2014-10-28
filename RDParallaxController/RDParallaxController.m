@@ -16,6 +16,7 @@
 @property (nonatomic, strong) UITapGestureRecognizer *topViewGestureRecognizer;
 @property (nonatomic, strong) UITapGestureRecognizer *bottomViewGestureRecognizer;
 @property (nonatomic, assign) CGFloat currentTopHeight;
+@property (nonatomic, assign) CGFloat topHeight;
 
 @property (nonatomic, readwrite) RDParallaxState state;
 @property (nonatomic, readwrite) RDParallaxGesture lastGesture;
@@ -46,11 +47,12 @@
 
 #pragma mark - RDParallaxController Methods
 
-- (void)setTopHeight:(CGFloat)height {
+- (void)setTopHeightConstraint:(NSLayoutConstraint *)topHeightConstraint {
     self.observersRegistered = NO;
-    _topHeight = height;
-    [self changeCurrentTopHeight:height];
-    [self setOverPanHeight:height * 1.5];
+    _topHeightConstraint = topHeightConstraint;
+    _topHeight = topHeightConstraint.constant;
+    [self changeCurrentTopHeight:_topHeight];
+    [self setOverPanHeight:_topHeight * 1.5f];
     [self checkAndSetup];
 }
 
