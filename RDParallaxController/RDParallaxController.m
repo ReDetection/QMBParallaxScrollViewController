@@ -98,31 +98,16 @@
         if ( !valuesAreEqual && shouldNotifyDelegate){
             [self.delegate parallaxScrollViewController:self didChangeState:(RDParallaxState) [change[NSKeyValueChangeNewKey] intValue]];
         }
-    } else if ([keyPath isEqualToString:@"bounds"] && !change[NSKeyValueChangeNotificationIsPriorKey]){
-        id value = change[NSKeyValueChangeNewKey];
-        double newHeight = [value CGRectValue].size.height;
-        if (ABS(_currentTopHeight - newHeight) > 0.5) {
-            NSLog(@"PARALLAX WARNING: somebody has set wrong bounds, probably that was autolayout. Forcing set to proper value, views may blink a little");
-            [self changeCurrentTopHeight:self.currentTopHeight];
-            __weak id weakself = self;
-            //FIXME replace this workaround with better solution
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [weakself changeCurrentTopHeight:self.currentTopHeight];
-            });
-        }
-
     } else if ([keyPath isEqualToString:@"observersRegistered"]) {
         BOOL old = [change[NSKeyValueChangeOldKey] boolValue];
         BOOL new = [change[NSKeyValueChangeNewKey] boolValue];
 
         if (!old && new) {
             [_bottomScrollView addObserver:self forKeyPath:@"contentOffset" options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld) context:nil];
-            [_topView addObserver:self forKeyPath:@"bounds" options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionPrior) context:nil];
             [self addObserver:self forKeyPath:@"state" options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld) context:nil];
 
         } else if (old && !new) {
             [_bottomScrollView removeObserver:self forKeyPath:@"contentOffset"];
-            [_topView removeObserver:self forKeyPath:@"bounds"];
             [self removeObserver:self forKeyPath:@"state"];
         }
     }
@@ -158,7 +143,9 @@
 }
 
 - (void)changeCurrentTopHeight:(CGFloat) height{
-    self.topView.frame = CGRectMake(_bottomScrollView.frame.origin.x, _bottomScrollView.frame.origin.y, _bottomScrollView.frame.size.width, height);
+    height = height < 0 ? 0 : height;
+    self.topHeightConstraint.constant = height;
+    [self.topView layoutIfNeeded];
     _bottomScrollView.contentInset = UIEdgeInsetsMake(height, 0, 0, 0);
     _currentTopHeight = height;
 
@@ -208,10 +195,10 @@
     } else {
         [self.topView setHidden:NO];
 
-        self.topView.frame = CGRectMake(_bottomScrollView.frame.origin.x, _bottomScrollView.frame.origin.y, _bottomScrollView.frame.size.width, newHeight);
+        self.topHeightConstraint.constant = newHeight;
 
         if ([self.delegate respondsToSelector:@selector(parallaxScrollViewController:didChangeTopHeight:)]){
-            [self.delegate parallaxScrollViewController:self didChangeTopHeight:self.topView.frame.size.height];
+            [self.delegate parallaxScrollViewController:self didChangeTopHeight:newHeight];
         }
         _bottomScrollView.contentInset = UIEdgeInsetsMake(newHeight, 0, 0, 0);
     }
