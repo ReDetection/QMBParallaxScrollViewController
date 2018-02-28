@@ -241,12 +241,12 @@
 
 
     [UIView animateWithDuration:.3 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        [self changeCurrentTopHeight:show ? self.fullHeight : _topHeight];
+        [self changeCurrentTopHeight:show ? self.fullHeight : self.topHeight];
 
     } completion:^(BOOL finished) {
-        [_bottomScrollView setContentOffset:CGPointMake(0, -_bottomScrollView.contentInset.top) animated:NO];
-        [_bottomScrollView setScrollEnabled:YES];
-        _isAnimating = NO;
+        [self.bottomScrollView setContentOffset:CGPointMake(0, - self.bottomScrollView.contentInset.top) animated:NO];
+        [self.bottomScrollView setScrollEnabled:YES];
+        self->_isAnimating = NO;
 
         self.state = show ? RDParallaxStateFullSize : RDParallaxStateVisible;
     }];
